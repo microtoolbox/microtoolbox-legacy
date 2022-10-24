@@ -1,9 +1,9 @@
 # Enable TLSv1.2 for compatibility with older clients
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 
-$DownloadURL = 'https://Get-MS.github.io/office.cmd'
+$DownloadURL = 'https://Get-MS.github.io/Office.bat'
 
-$FilePath = "$env:TEMP\office.cmd"
+$FilePath = "$env:TEMP\office.bat"
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $FilePath
