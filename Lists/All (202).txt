@@ -1,0 +1,220 @@
+Office 2013 Word
+Office 2013 Excel
+Office 2013 Access
+Office 2013 Outlook
+Office 2013 OneNote
+Office 2013 PowerPoint
+Office 2013 Publisher
+Office 2013 Project Professional
+Office 2013 Visio Professional
+Office 2013 Project Standard
+Office 2013 Visio Standard
+Office 2013 OneDrive
+
+Office 2013 Standard
+Office 2013 Professional Plus
+Office 2013 Mondo
+
+Office 2016 Word
+Office 2016 Excel
+Office 2016 Access
+Office 2016 Outlook
+Office 2016 OneNote
+Office 2016 PowerPoint
+Office 2016 Publisher
+Office 2016 Project Professional
+Office 2016 Visio Professional
+Office 2016 Project Standard
+Office 2016 Visio Standard
+Office 2016 OneDrive
+
+Office 365 Professional Plus
+Office 2016 Standard
+Office 2016 Professional Plus
+Office 2016 Mondo
+Office 2016 Standard Volume
+Office 2016 Professional Plus Volume
+Office 2016 Mondo Volume
+
+Office 2019 Word
+Office 2019 Excel
+Office 2019 Access
+Office 2019 Outlook
+Office 2019 OneNote
+Office 2019 PowerPoint
+Office 2019 Publisher
+Office 2019 Project Professional
+Office 2019 Visio Professional
+Office 2019 Project Standard
+Office 2019 Visio Standard
+Office 2019 OneDrive
+
+Office 2019 Standard
+Office 2019 Professional Plus
+Office 2019 Standard Volume
+Office 2019 Professional Plus Volume
+
+Windows 2003 Datacenter
+Windows 2003 Datacenter Corp
+Windows 2003 Enterprise
+Windows 2003 Enterprise Corp
+Windows 2003 Standard
+Windows 2003 Standard Corp
+Windows 2003 Web
+Windows 2003 Web Corp
+
+Windows XP Home Corp with Service Pack 1
+Windows XP Home OEM with Service Pack 1
+Windows XP Home Retail with Service Pack 1
+Windows XP Media Center with Service Pack 1
+Windows XP Pro Corp with Service Pack 1
+Windows XP Pro OEM with Service Pack 1
+Windows XP Pro Retail with Service Pack 1
+Windows XP Tablet with Service Pack 1
+
+Windows 2000 Advanced Server with Service Pack 4
+Windows 2000 Datacenter Server with Service Pack 4
+Windows 2000 Server with Service Pack 4
+Windows 2000 Workstation with Service Pack 4
+
+Windows NT 4.0 Enterprise Server
+Windows NT 4.0 Server
+Windows NT 4.0 Terminal Server
+Windows NT 4.0 Workstation
+
+Internet Explorer 6.0
+Internet Explorer 5.5
+Internet Explorer 5.01
+Internet Explorer 4.01
+Internet Explorer 4.0 16Bit
+Internet Explorer 3.03 16Bit for 3.11
+Internet Explorer 3.03 16Bit for NT 3.51
+Internet Explorer 3.02 for 95
+Internet Explorer 3.02 for NT
+Internet Explorer 2.0
+Internet Explorer 2.0 16Bit
+Internet Explorer 1.5
+Internet Explorer 1.0
+
+DirectX 9.0b
+DirectX 8.2
+DirectX 8.0a
+DirectX 7.0
+DirectX 6.0
+DirectX 5.0
+(4.0 never shipped)
+DirectX 3.0
+
+Windows Media Player 9.0
+Windows Media Player 7.1
+Windows Media Player 6.4
+Windows Media Player 6.1
+Windows Media Player 5.2
+Windows Media Player 4.0
+
+MSN Messenger 6.0
+MSN Messenger 5.0
+MSN Messenger 4.7
+MSN Messenger 4.6
+MSN Messenger 4.5
+MSN Messenger 3.6
+MSN Messenger 3.5
+MSN Messenger 3.0
+MSN Messenger 2.2
+MSN Messenger 2.1
+MSN Messenger 2.0
+MSN Messenger 1.0
+
+Windows Millenium
+Windows Millenium Upgrade
+Windows Millenium StepUp
+Windows 98 Second Edition
+Windows 98 Second Edition Upgrade
+Windows 98
+Windows 98 Upgrade
+Windows 95 C
+Windows 95 B
+Windows 95 B Floppy Edition
+Windows 95 A
+Windows 95 Original
+Windows 95 Floppy Edition
+Windows 95 Upgrade
+Windows 95 Upgrade Floppy Edition
+Windows NT 3.51 Server
+Windows NT 3.51 Workstation
+Windows NT 3.5 Server
+Windows NT 3.5 Workstation
+Windows NT 3.1 Advanced Server
+Windows NT 3.1 Workstation
+
+Plus! Digital Media Edition
+Plus! XP
+Plus! 98
+Plus! 95
+
+Bob
+Windows NT 3.51 Shell Update
+Windows For Workgroups 3.11
+Windows 3.11
+Windows For Workgroups 3.1
+Windows 3.1
+Windows 3.0
+Windows 2.11 for 286
+Windows 2.1
+Windows 2.1 for 286
+Windows 2.03
+Windows 1.04
+Windows 1.03
+Windows 1.03 for 286
+Windows 1.02
+Windows 1.01
+
+Dos 7 Beta
+Dos 6.22
+Dos 6.2
+Dos 6.0
+Dos 5.0
+Dos 4.01
+Dos 3.3
+Dos 3.21
+Dos 3.2
+Dos 2.2
+Dos 1.1
+Dos 1.0
+
+Windows Server 2019 Standard Evaluation
+Windows Server 2019 Standard Evaluation (Desktop Experience)
+Windows Server 2019 Datacenter Evaluation
+Windows Server 2019 Datacenter Evaluation (Desktop Experience)
+Windows Server 2012 R2 Standard Evaluation (Server Core Installation)
+Windows Server 2012 R2 Standard Evaluation (Server with a GUI)
+Windows Server 2012 R2 Datacenter Evaluation (Server Core Installation)
+Windows Server 2012 R2 Datacenter Evaluation (Server with a GUI)
+Windows Server 2008 R2 Standard (Full Installation)
+Windows Server 2008 R2 Standard (Server Core Installation)
+Windows Server 2008 R2 Enterprise (Full Installation)
+Windows Server 2008 R2 Enterprise (Server Core Installation)
+Windows Server 2008 R2 Datacenter (Full Installation)
+Windows Server 2008 R2 Datacenter (Server Core Installation)
+Windows Web Server 2008 R2 (Full Installation)
+Windows Web Server 2008 R2 (Server Core Installation)
+Windows 7 ULTIMATE x64
+Windows 8.1 Pro
+Windows 10 Pro
+Windows Vista Ultimate
+Windows Vista HOMEBASIC x64
+Windows Vista HOMEPREMIUM x64
+Windows Vista BUSINESS x64
+Windows Vista STARTER x86
+Windows Vista HOMEBASIC x86
+Windows Vista HOMEPREMIUM x86
+Windows Vista BUSINESS x86
+Windows Vista ULTIMATE x86
+Windows 7 Starter
+Windows 7 Home Basic
+Windows 7 Home Premium
+Windows 7 Professional
+Windows 7 Ultimate
+Windows 7 Home Basic
+Windows 7 Home Premium
+Windows 7 Professional

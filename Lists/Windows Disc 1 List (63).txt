@@ -1,0 +1,70 @@
+Windows 2003 Datacenter
+Windows 2003 Datacenter Corp
+Windows 2003 Enterprise
+Windows 2003 Enterprise Corp
+Windows 2003 Standard
+Windows 2003 Standard Corp
+Windows 2003 Web
+Windows 2003 Web Corp
+
+Windows XP Home Corp with Service Pack 1
+Windows XP Home OEM with Service Pack 1
+Windows XP Home Retail with Service Pack 1
+Windows XP Media Center with Service Pack 1
+Windows XP Pro Corp with Service Pack 1
+Windows XP Pro OEM with Service Pack 1
+Windows XP Pro Retail with Service Pack 1
+Windows XP Tablet with Service Pack 1
+
+Windows 2000 Advanced Server with Service Pack 4
+Windows 2000 Datacenter Server with Service Pack 4
+Windows 2000 Server with Service Pack 4
+Windows 2000 Workstation with Service Pack 4
+
+Windows NT 4.0 Enterprise Server
+Windows NT 4.0 Server
+Windows NT 4.0 Terminal Server
+Windows NT 4.0 Workstation
+
+Internet Explorer 6.0
+Internet Explorer 5.5
+Internet Explorer 5.01
+Internet Explorer 4.01
+Internet Explorer 4.0 16Bit
+Internet Explorer 3.03 16Bit for 3.11
+Internet Explorer 3.03 16Bit for NT 3.51
+Internet Explorer 3.02 for 95
+Internet Explorer 3.02 for NT
+Internet Explorer 2.0
+Internet Explorer 2.0 16Bit
+Internet Explorer 1.5
+Internet Explorer 1.0
+
+DirectX 9.0b
+DirectX 8.2
+DirectX 8.0a
+DirectX 7.0
+DirectX 6.0
+DirectX 5.0
+(4.0 never shipped)
+DirectX 3.0
+
+Windows Media Player 9.0
+Windows Media Player 7.1
+Windows Media Player 6.4
+Windows Media Player 6.1
+Windows Media Player 5.2
+Windows Media Player 4.0
+
+MSN Messenger 6.0
+MSN Messenger 5.0
+MSN Messenger 4.7
+MSN Messenger 4.6
+MSN Messenger 4.5
+MSN Messenger 3.6
+MSN Messenger 3.5
+MSN Messenger 3.0
+MSN Messenger 2.2
+MSN Messenger 2.1
+MSN Messenger 2.0
+MSN Messenger 1.0

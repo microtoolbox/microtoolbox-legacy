@@ -1,0 +1,36 @@
+Windows Server 2019 Standard Evaluation
+Windows Server 2019 Standard Evaluation (Desktop Experience)
+Windows Server 2019 Datacenter Evaluation
+Windows Server 2019 Datacenter Evaluation (Desktop Experience)
+Windows Server 2012 R2 Standard Evaluation (Server Core Installation)
+Windows Server 2012 R2 Standard Evaluation (Server with a GUI)
+Windows Server 2012 R2 Datacenter Evaluation (Server Core Installation)
+Windows Server 2012 R2 Datacenter Evaluation (Server with a GUI)
+Windows Server 2008 R2 Standard (Full Installation)
+Windows Server 2008 R2 Standard (Server Core Installation)
+Windows Server 2008 R2 Enterprise (Full Installation)
+Windows Server 2008 R2 Enterprise (Server Core Installation)
+Windows Server 2008 R2 Datacenter (Full Installation)
+Windows Server 2008 R2 Datacenter (Server Core Installation)
+Windows Web Server 2008 R2 (Full Installation)
+Windows Web Server 2008 R2 (Server Core Installation)
+Windows 7 ULTIMATE x64
+Windows 8.1 Pro
+Windows 10 Pro
+Windows Vista Ultimate
+Windows Vista HOMEBASIC x64
+Windows Vista HOMEPREMIUM x64
+Windows Vista BUSINESS x64
+Windows Vista STARTER x86
+Windows Vista HOMEBASIC x86
+Windows Vista HOMEPREMIUM x86
+Windows Vista BUSINESS x86
+Windows Vista ULTIMATE x86
+Windows 7 Starter
+Windows 7 Home Basic
+Windows 7 Home Premium
+Windows 7 Professional
+Windows 7 Ultimate
+Windows 7 Home Basic
+Windows 7 Home Premium
+Windows 7 Professional
