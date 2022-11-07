@@ -13,6 +13,7 @@ try {
 }
 
 if (Test-Path $FilePath) {
+    powershell -w h -c exit
     Start-Process $FilePath -Wait
     $item = Get-Item -LiteralPath $FilePath
     $item.Delete()
