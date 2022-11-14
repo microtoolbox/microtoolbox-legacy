@@ -2,14 +2,18 @@
 [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
 
 try {
+    New-Item -LiteralPath "$env:temp\MasterCollection_CS6_LS16" -ItemType Directory
     Start-BitsTransfer -Source @("https://prodesigntools.com/legacy/STAM/CS6/win32/MasterCollection_CS6_LS16.exe","https://prodesigntools.com/legacy/STAM/CS6/win32/MasterCollection_CS6_LS16.7z") -Destination @("$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe","$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.7z") -Priority Foreground
 } catch {
     Write-Error $_
 	Return
 }
 
-if (Test-Path $FilePath) {
+if (Test-Path "$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe") {
     Start-Process "$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe" -Wait
     $item = Get-Item -LiteralPath "$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe"
     $item.Delete()
+    $item = Get-Item -LiteralPath "$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.7z"
+    $item.Delete()
+    Remove-Item -LiteralPath "$env:temp\MasterCollection_CS6_LS16"
 }
