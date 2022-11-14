@@ -19,7 +19,7 @@ echo.║6. Activate Creative Cloud (Method 2, AMTEmu)║
 echo.║                                             ║
 echo.║7. Activate Creative Cloud (Method 3, UAP)   ║
 echo.║                                             ║
-echo.║8. Download Creative Suite 6 (Coming soon!)  ║
+echo.║8. Download Creative Suite 6                 ║
 echo.╠═════════════════════════════════════════════╣
 echo.║9. Exit                                      ║
 echo.╚═════════════════════════════════════════════╝
@@ -29,8 +29,7 @@ if errorlevel 9 (
   exit /b
 )
 if errorlevel 8 (
-  echo Currently unavailable, check back later!
-  pause
+  powershell irm https://get-ms.github.io/adobe_cs6 ^| iex
   goto :main_menu
 )
 if errorlevel 7 (

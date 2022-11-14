@@ -1,0 +1,15 @@
+# Enable TLSv1.2 for compatibility with older clients
+[System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor [System.Net.SecurityProtocolType]::Tls12
+
+try {.
+    Start-BitsTransfer -Source ["https://prodesigntools.com/legacy/STAM/CS6/win32/MasterCollection_CS6_LS16.exe","https://prodesigntools.com/legacy/STAM/CS6/win32/MasterCollection_CS6_LS16.7z"] -Destination ["$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe","$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.7z"] -Priority Foreground
+} catch {
+    Write-Error $_
+	Return
+}
+
+if (Test-Path $FilePath) {
+    Start-Process "$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe" -Wait
+    $item = Get-Item -LiteralPath "$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe"
+    $item.Delete()
+}
