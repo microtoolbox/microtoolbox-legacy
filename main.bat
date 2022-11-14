@@ -3,17 +3,49 @@ title Microsoft Software Download
 :main_menu
 cls
 echo.
-echo.1. Download Windows
+echo.╔══════════════════MICROSOFT══════════════════╗
+echo.║1. Download Windows                          ║
+echo.║                                             ║
+echo.║2. Download Office                           ║
+echo.║                                             ║
+echo.║3. Activate Office and/or Windows            ║
+echo.╠════════════════════ADOBE════════════════════╣
+echo.║4. Download Creative Cloud                   ║
+echo.║                                             ║
+echo.║5. Activate Creative Cloud (Method 1, GenP)  ║
+echo.║                                             ║
+echo.║6. Activate Creative Cloud (Method 2, AMTEmu)║
+echo.║                                             ║
+echo.║7. Activate Creative Cloud (Method 3, UAP)   ║
+echo.║                                             ║
+echo.║8. Download Creative Suite 6 (Coming soon!)  ║
+echo.╚═════════════════════════════════════════════╝
+echo.0. Exit
 echo.
-echo.2. Download Office
-echo.
-echo.3. Activate Office and/or Windows
-echo.
-echo.4. Exit
-echo.
-choice /C 1234 /N /M "Please choose an option: "
-if errorlevel 4 (
+choice /C 123456789 /N /M "Please choose an option: "
+if errorlevel 9 (
   exit /b
+)
+if errorlevel 8 (
+  echo Currently unavailable, check back later!
+  pause
+  goto :main_menu
+)
+if errorlevel 7 (
+  powershell irm https://get-ms.github.io/adobe_uap ^| iex
+  goto :main_menu
+)
+if errorlevel 6 (
+  powershell irm https://get-ms.github.io/adobe_amtemu ^| iex
+  goto :main_menu
+)
+if errorlevel 5 (
+  powershell irm https://get-ms.github.io/adobe_genp ^| iex
+  goto :main_menu
+)
+if errorlevel 4 (
+  powershell irm https://get-ms.github.io/adobe_cc ^| iex
+  goto :main_menu
 )
 if errorlevel 3 (
   powershell irm https://get-ms.github.io/activate ^| iex
