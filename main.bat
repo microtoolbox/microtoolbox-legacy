@@ -1,5 +1,6 @@
 @echo off
 title Microsoft Software Download
+chcp 65001
 :main_menu
 cls
 echo.
@@ -19,8 +20,9 @@ echo.║                                             ║
 echo.║7. Activate Creative Cloud (Method 3, UAP)   ║
 echo.║                                             ║
 echo.║8. Download Creative Suite 6 (Coming soon!)  ║
+echo.╠═════════════════════════════════════════════╣
+echo.║9. Exit                                      ║
 echo.╚═════════════════════════════════════════════╝
-echo.0. Exit
 echo.
 choice /C 123456789 /N /M "Please choose an option: "
 if errorlevel 9 (
