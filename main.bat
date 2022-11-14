@@ -1,7 +1,7 @@
 @echo off
 title Microsoft Software Download
-chcp 65001
 :main_menu
+chcp 65001
 cls
 echo.
 echo.╔══════════════════MICROSOFT══════════════════╗
@@ -24,6 +24,7 @@ echo.╠════════════════════════
 echo.║9. Exit                                      ║
 echo.╚═════════════════════════════════════════════╝
 echo.
+chcp 850 > nul
 choice /C 123456789 /N /M "Please choose an option: "
 if errorlevel 9 (
   exit /b
