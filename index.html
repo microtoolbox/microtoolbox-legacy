@@ -1,8 +1,44 @@
 <style>kbd {display: inline-block; margin: 0 0.1em; padding: 0.1em 0.6em; font-family: -apple-system,BlinkMacSystemFont,"Segoe UI Adjusted","Segoe UI","Liberation Sans",sans-serif; font-size: 11px; line-height: 1.5; color: #232629; text-shadow: 0 1px 0 white; background-color: #e3e6e8; border: 1px solid #9fa6ad; border-radius: 3px; box-shadow: 0 1px 1px #0c0d0e26, inset 0 1px 0 0 white; overflow-wrap: break-word;}</style>
+<script>
+function fallbackCopyTextToClipboard(text) {
+  var textArea = document.createElement("textarea");
+  textArea.value = text;
+  
+  // Avoid scrolling to bottom
+  textArea.style.top = "0";
+  textArea.style.left = "0";
+  textArea.style.position = "fixed";
+
+  document.body.appendChild(textArea);
+  textArea.focus();
+  textArea.select();
+
+  try {
+    var successful = document.execCommand('copy');
+    var msg = successful ? 'successful' : 'unsuccessful';
+    console.log('Fallback: Copying text command was ' + msg);
+  } catch (err) {
+    console.error('Fallback: Oops, unable to copy', err);
+  }
+
+  document.body.removeChild(textArea);
+}
+function copyTextToClipboard(text) {
+  if (!navigator.clipboard) {
+    fallbackCopyTextToClipboard(text);
+    return;
+  }
+  navigator.clipboard.writeText(text).then(function() {
+    console.log('Async: Copying to clipboard was successful!');
+  }, function(err) {
+    console.error('Async: Could not copy text: ', err);
+  });
+}
+</script>
 To launch the GetMS toolkit:
 <ol style="padding-inline-start: 1em;">
-<li>Press <kbd>Win</kbd>+<kbd>r</kbd></li>
-<li>Type in <code style="background-color: #EEE">powershell irm get-ms.github.io/go|iex</code></li>
+<li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
+<li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);alert('Copied');">powershell irm get-ms.github.io/go|iex</code></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
 <div>If you need older Windows versions, get the <a href="https://archive.org/details/msaio_202207">Microsoft All-in-one</a></div>
