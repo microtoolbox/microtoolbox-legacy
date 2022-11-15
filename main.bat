@@ -1,13 +1,15 @@
 @Echo off
-powershell Start-BitsTransfer -Source @("https://get-ms.github.io/batbox.exe","https://get-ms.github.io/getinput.exe") -Destination @("$env:temp\batbox.exe","$env:temp\getinput.exe") -Priority Foreground
+powershell irm https://get-ms.github.io/get_gui_files ^| iex
+set "batbox=%temp%\batbox.exe"
+set "getinput=%temp%\getinput.exe"
 Mode 48,15
 Title Software Download
-Batbox /h 0
+"%Batbox%" /h 0
 
 :MainMenu
 cls
 Call :Button 17 4 "Microsoft" 19 8 "Adobe" # Press
-Getinput /m %Press% /h 70
+"%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
 if %errorlevel%==1 (goto :Microsoft)
@@ -18,7 +20,7 @@ goto :MainMenu
 :Microsoft
 cls
 Call :Button 0 0 "Back" 12 4 "Windows" 25 4 "Office" 17 8 "Activation" # Press
-Getinput /m %Press% /h 70
+"%Getinput%" /m %Press% /h 70
 if %errorlevel%==1 (goto :MainMenu)
 if %errorlevel%==2 (call :Windows)
 if %errorlevel%==3 (call :Office)
@@ -39,12 +41,12 @@ exit /b
 
 :Adobe
 cls
-Batbox /g 21 2
-Batbox /d "Software"
-Batbox /g 20 9
-Batbox /d "Activation"
+"%Batbox%" /g 21 2
+"%Batbox%" /d "Software"
+"%Batbox%" /g 20 9
+"%Batbox%" /d "Activation"
 Call :Button 0 0 "Back" 10 3 " Download Creative Cloud " 10 6 "Download Creative Suite 6" 10 10 "GenP" 20 10 "AMTEmu" 32 10 "UAP" # Press
-Getinput /m %Press% /h 70
+"%Getinput%" /m %Press% /h 70
 if %errorlevel%==1 (goto :MainMenu)
 if %errorlevel%==2 (call :CreativeCloud)
 if %errorlevel%==3 (call :CreativeSuite6)
@@ -101,7 +103,7 @@ exit /b
 ::------------- Begin Program -------------::
 :SLoop
     if "%1"=="" (exit)
-    if "%1"=="#" (batbox !Buttons! & endlocal & set "%~2=%Button_Dim%" & exit /b)
+    if "%1"=="#" ("%batbox%" !Buttons! & endlocal & set "%~2=%Button_Dim%" & exit /b)
     set XBPB=%1
     set YBPB=%2
     set "Text_Button=%~3"
