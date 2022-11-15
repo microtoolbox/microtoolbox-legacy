@@ -10,7 +10,7 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" 35 14 "Disable Defender" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 27 12 "Disable Defender" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
@@ -166,6 +166,7 @@ exit /b
 ::------------- End Funcs -------------::
 
 :DisableDefender
+cls
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
 rundll32 shell32.dll, RestartDialog
