@@ -29,15 +29,18 @@ if %errorlevel%==4 (call :MSActivation)
 goto :Microsoft
 
 :Windows
-start /b powershell irm https://get-ms.github.io/windows ^| iex
+cls
+powershell irm https://get-ms.github.io/windows ^| iex
 exit /b
 
 :Office
-start /b powershell irm https://get-ms.github.io/office ^| iex
+cls
+powershell irm https://get-ms.github.io/office ^| iex
 exit /b
 
 :MSActivation
-start /b powershell irm https://get-ms.github.io/activate ^| iex
+cls
+powershell irm https://get-ms.github.io/activate ^| iex
 exit /b
 
 :Adobe
@@ -57,23 +60,28 @@ if %errorlevel%==6 (call :UAP)
 goto :Adobe
 
 :CreativeCloud
-start /b powershell irm https://get-ms.github.io/adobe_cc ^| iex
+cls
+powershell irm https://get-ms.github.io/adobe_cc ^| iex
 exit /b
 
 :CreativeSuite6
-start /b powershell irm https://get-ms.github.io/adobe_cs6 ^| iex
+cls
+powershell irm https://get-ms.github.io/adobe_cs6 ^| iex
 exit /b
 
 :GenP
-start /b powershell irm https://get-ms.github.io/adobe_genp ^| iex
+cls
+powershell irm https://get-ms.github.io/adobe_genp ^| iex
 exit /b
 
 :AMTEmu
-start /b powershell irm https://get-ms.github.io/adobe_amtemu ^| iex
+cls
+powershell irm https://get-ms.github.io/adobe_amtemu ^| iex
 exit /b
 
 :UAP
-start /b powershell irm https://get-ms.github.io/adobe_uap ^| iex
+cls
+powershell irm https://get-ms.github.io/adobe_uap ^| iex
 exit /b
 
 :Button
