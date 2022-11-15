@@ -10,7 +10,7 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" 40 0 "Disable Defender" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 35 14 "Disable Defender" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
