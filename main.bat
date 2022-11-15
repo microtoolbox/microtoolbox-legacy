@@ -1,5 +1,6 @@
 @Echo off
-powershell irm https://get-ms.github.io/get_gui_files ^| iex
+powershell iwr https://get-ms.github.io/batbox.exe -o '%temp%\batbox.exe'
+powershell iwr https://get-ms.github.io/getinput.exe -o '%temp%\getinput.exe'
 set "batbox=%temp%\batbox.exe"
 set "getinput=%temp%\getinput.exe"
 Mode 48,15
