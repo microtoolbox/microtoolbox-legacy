@@ -1,15 +1,5 @@
 @Echo off
 set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
-FOR /F "tokens=3" %%i IN ('reg query "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware') DO (
-  if not "%%~I"=="0x1" (
-    choice /M "Windows Defender must be disabled for this to work. Disable it now"
-    if errorlevel 1 if not errorlevel 2 (
-      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f
-      reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-      rundll32 shell32.dll, RestartDialog
-    )
-  )
-)
 powershell iwr https://get-ms.github.io/batbox.exe -o '%temp%\batbox.exe'
 powershell iwr https://get-ms.github.io/getinput.exe -o '%temp%\getinput.exe'
 set "batbox=%temp%\batbox.exe"
@@ -20,13 +10,13 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 40 0 "Disable Defender" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
 if %errorlevel%==1 (goto :Microsoft)
 if %errorlevel%==2 (goto :Adobe)
-if %errorlevel%==3 (exit)
+if %errorlevel%==3 (call :DisableDefender)
 goto :MainMenu
 
 :Microsoft
@@ -174,6 +164,12 @@ goto SLoop
     endlocal & set %2=!cn!
 exit /b
 ::------------- End Funcs -------------::
+
+:DisableDefender
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+rundll32 shell32.dll, RestartDialog
+exit /b
 
 #:RunAsTI snippet to run as TI/System, with innovative HKCU load, ownership privileges, high priority, and explorer support  
 set ^ #=& set "0=%~f0"& set 1=%*& powershell -c iex(([io.file]::ReadAllText($env:0)-split'#\:RunAsTI .*')[1])& exit /b
