@@ -6,7 +6,7 @@ $DownloadURL = 'https://Get-MS.github.io/main.bat'
 $FilePath = "$env:TEMP\getms.bat"
 
 try {
-    Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $FilePath
+    Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $FilePath -Headers @{"Cache-Control"="no-cache"}
 } catch {
     Write-Error $_
 	Return
