@@ -6,6 +6,7 @@ try {
     New-Item -Path "$env:temp\MasterCollection_CS6_LS16" -ItemType Directory
 } catch {
     Write-Error $_
+    pause
 	Return
 }
 }
@@ -14,6 +15,7 @@ try {
     Start-BitsTransfer -Source @("https://prodesigntools.com/legacy/STAM/CS6/win32/MasterCollection_CS6_LS16.exe","https://prodesigntools.com/legacy/STAM/CS6/win32/MasterCollection_CS6_LS16.7z") -Destination @("$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.exe","$env:temp\MasterCollection_CS6_LS16\MasterCollection_CS6_LS16.7z") -Priority Foreground
 } catch {
     Write-Error $_
+    pause
 	Return
 }
 
