@@ -10,13 +10,13 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" 27 12 "Disable Defender" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 27 12 "Toggle Defender" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
 if %errorlevel%==1 (goto :Microsoft)
 if %errorlevel%==2 (goto :Adobe)
-if %errorlevel%==3 (call :DisableDefender)
+if %errorlevel%==3 (call :ToggleDefender)
 goto :MainMenu
 
 :Microsoft
@@ -165,11 +165,12 @@ goto SLoop
 exit /b
 ::------------- End Funcs -------------::
 
-:DisableDefender
+:ToggleDefender
 cls
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f
-reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
-rundll32 shell32.dll, RestartDialog
+::reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f
+::reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender" /v DisableAntiSpyware /t REG_DWORD /d 1 /f
+::rundll32 shell32.dll, RestartDialog
+powershell -c Add-Type -AssemblyName PresentationCore,PresentationFramework;If((Get-MpPreference).ExclusionExtension -And(Get-MpPreference).ExclusionExtension.Contains('*')){Remove-MpPreference -ExclusionExtension *;[System.Windows.MessageBox]::Show("Defender is now ENABLED", "Defender")}Else{Add-MpPreference -ExclusionExtension *;[System.Windows.MessageBox]::Show("Defender is now DISABLED", "Defender")}
 exit /b
 
 #:RunAsTI snippet to run as TI/System, with innovative HKCU load, ownership privileges, high priority, and explorer support  
