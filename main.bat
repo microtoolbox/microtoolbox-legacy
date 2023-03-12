@@ -10,13 +10,13 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" 27 12 "Toggle Defender" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 26 12 "Defender Conntrol" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
 if %errorlevel%==1 (goto :Microsoft)
 if %errorlevel%==2 (goto :Adobe)
-if %errorlevel%==3 (call :ToggleDefender)
+if %errorlevel%==3 (call :DefenderControl)
 goto :MainMenu
 
 :Microsoft
@@ -165,7 +165,7 @@ goto SLoop
 exit /b
 ::------------- End Funcs -------------::
 
-:ToggleDefender
+:DefenderControl
 cls
 ::Method 1
 ::reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows Defender\Real-Time Protection" /v DisableRealtimeMonitoring /t REG_DWORD /d 1 /f
