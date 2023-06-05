@@ -10,7 +10,7 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" 16 12 "StartIsBack" 27 12 "Defender Control" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 27 4 "StartIsBack" 27 12 "Defender Control" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
