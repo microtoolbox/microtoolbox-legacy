@@ -10,7 +10,7 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" 27 4 "StartIsBack" 27 12 "Defender Control" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 32 4 "StartIsBack" 27 12 "Defender Control" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
@@ -67,7 +67,7 @@ cls
 "%Batbox%" /d "Software"
 "%Batbox%" /g 20 9
 "%Batbox%" /d "Activation"
-Call :Button 0 0 "Back" 10 3 " Download StartIsBack++ " 10 6 "Download StartAllBack " 10 10 "SIB++" 33 10 "SAB" # Press
+Call :Button 0 0 "Back" 10 3 " Download StartIsBack++ " 11 6 "Download StartAllBack " 10 10 "SIB++" 33 10 "SAB" # Press
 "%Getinput%" /m %Press% /h 70
 if %errorlevel%==1 (goto :MainMenu)
 if %errorlevel%==2 (call :SIB)
