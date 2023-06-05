@@ -10,13 +10,14 @@ Title Software Download
 
 :MainMenu
 cls
-Call :Button 17 4 "Microsoft" 19 8 "Adobe" 26 12 "Defender Conntrol" # Press
+Call :Button 17 4 "Microsoft" 19 8 "Adobe" 16 12 "StartIsBack" 27 12 "Defender Control" # Press
 "%Getinput%" /m %Press% /h 70
 
 :: Check for the pressed button 
 if %errorlevel%==1 (goto :Microsoft)
 if %errorlevel%==2 (goto :Adobe)
-if %errorlevel%==3 (call :DefenderControl)
+if %errorlevel%==3 (goto :StartIsBack)
+if %errorlevel%==4 (call :DefenderControl)
 goto :MainMenu
 
 :Microsoft
@@ -59,6 +60,43 @@ if %errorlevel%==4 (call :GenP)
 if %errorlevel%==5 (call :AMTEmu)
 if %errorlevel%==6 (call :UAP)
 goto :Adobe
+
+:StartIsBack
+cls
+"%Batbox%" /g 21 2
+"%Batbox%" /d "Software"
+"%Batbox%" /g 20 9
+"%Batbox%" /d "Activation"
+Call :Button 0 0 "Back" 10 3 " Download StartIsBack++ " 10 6 "Download StartAllBack " 10 10 "SIB++" 33 10 "SAB" # Press
+"%Getinput%" /m %Press% /h 70
+if %errorlevel%==1 (goto :MainMenu)
+if %errorlevel%==2 (call :SIB)
+if %errorlevel%==3 (call :SAB)
+if %errorlevel%==4 (call :ActivateSIB)
+if %errorlevel%==5 (call :ActivateSAB)
+goto :StartIsBack
+
+:SIB
+cls
+curl https://startisback.sfo3.cdn.digitaloceanspaces.com/StartIsBackPlusPlus_setup.exe -o "%WinDir%\SIB.exe"
+start "" "%WinDir%\SIB.exe"
+exit /b
+
+:SAB
+cls
+curl https://www.startallback.com/download.php -L -o "%WinDir%\SIB.exe"
+start "" "%WinDir%\SIB.exe"
+exit /b
+
+:ActivateSIB
+curl https://microtoolbox.github.io/msimg32.dll -o "%ProgramFiles(x86)%\StartIsBack\msimg32.dll"
+exit /b
+
+:ActivateSAB
+curl https://microtoolbox.github.io/StartAllBack_3.x_Patch.exe -o "%temp%\StartAllBack_3.x_Patch.exe"
+start /wait "" "%temp%\StartAllBack_3.x_Patch.exe"
+del /F /Q "%temp%\StartAllBack_3.x_Patch.exe"
+exit /b
 
 :CreativeCloud
 cls
