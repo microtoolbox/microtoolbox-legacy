@@ -102,7 +102,7 @@ start "" "%WinDir%\SIB.exe"
 exit /b
 
 :ActivateSIB
-curl https://microtoolbox.github.io/msimg32.dll -o "%ProgramFiles(x86)%\StartIsBack\msimg32.dll"
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/msimg32.dll -OutFile "%ProgramFiles(x86)%\StartIsBack\msimg32.dll"
 taskkill /f /im explorer.exe
 start explorer
 exit /b
