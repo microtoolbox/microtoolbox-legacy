@@ -78,8 +78,21 @@ goto :StartIsBack
 
 :SIB
 cls
-curl https://startisback.sfo3.cdn.digitaloceanspaces.com/StartIsBackPlusPlus_setup.exe -o "%WinDir%\SIB.exe"
+ver|find "6.2"
+if not errorlevel 1 (
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBack_setup.exe -OutFile "%WinDir%\SIB.exe"
 start "" "%WinDir%\SIB.exe"
+)
+ver|find "6.3"
+if not errorlevel 1 (
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
+start "" "%WinDir%\SIB.exe"
+)
+ver|find "10.0"
+if not errorlevel 1 (
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlusPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
+start "" "%WinDir%\SIB.exe"
+)
 exit /b
 
 :SAB
