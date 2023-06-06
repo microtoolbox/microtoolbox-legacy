@@ -1,7 +1,7 @@
 @Echo off
 set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/batbox.exe -OutFile '%temp%\batbox.exe'
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/getinput.exe -OutFile '%temp%\getinput.exe'
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/batbox.exe -OutFile '%temp%\batbox.exe'
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/getinput.exe -OutFile '%temp%\getinput.exe'
 set "batbox=%temp%\batbox.exe"
 set "getinput=%temp%\getinput.exe"
 Mode 48,15
@@ -32,17 +32,17 @@ goto :Microsoft
 
 :Windows
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/windows ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/windows ^| iex
 exit /b
 
 :Office
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/office ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/office ^| iex
 exit /b
 
 :MSActivation
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/activate ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/activate ^| iex
 exit /b
 
 :Adobe
@@ -80,17 +80,17 @@ goto :StartIsBack
 cls
 ver|find "6.2"
 if not errorlevel 1 (
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBack_setup.exe -OutFile "%WinDir%\SIB.exe"
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBack_setup.exe -OutFile "%WinDir%\SIB.exe"
 start "" "%WinDir%\SIB.exe"
 )
 ver|find "6.3"
 if not errorlevel 1 (
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
 start "" "%WinDir%\SIB.exe"
 )
 ver|find "10.0"
 if not errorlevel 1 (
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlusPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlusPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
 start "" "%WinDir%\SIB.exe"
 )
 exit /b
@@ -102,7 +102,7 @@ start "" "%WinDir%\SIB.exe"
 exit /b
 
 :ActivateSIB
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/msimg32.dll -OutFile "${Env:ProgramFiles(x86)}\StartIsBack\msimg32.dll"
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/msimg32.dll -OutFile "${Env:ProgramFiles(x86)}\StartIsBack\msimg32.dll"
 taskkill /f /im explorer.exe
 start explorer
 exit /b
@@ -115,27 +115,27 @@ exit /b
 
 :CreativeCloud
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_cc ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_cc ^| iex
 exit /b
 
 :CreativeSuite6
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_cs6 ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_cs6 ^| iex
 exit /b
 
 :GenP
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_genp ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_genp ^| iex
 exit /b
 
 :AMTEmu
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_amtemu ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_amtemu ^| iex
 exit /b
 
 :UAP
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_uap ^| iex
+powershell [System.Net.ServicePointManager]::ServerCertificateValidationCallback = {$true};[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_uap ^| iex
 exit /b
 
 :Button
