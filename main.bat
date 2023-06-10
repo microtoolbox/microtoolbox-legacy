@@ -109,8 +109,8 @@ if not errorlevel 1 (
 exit /b
 
 :ActivateSIB
-wmic os get caption /value|findstr /C:"Microsoft Windows 10"
-if not errorlevel 1 (
+wmic os get caption /value|findstr /C:"Microsoft Windows 11"
+if errorlevel 1 (
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/msimg32.dll -OutFile "${Env:ProgramFiles(x86)}\StartIsBack\msimg32.dll"
   taskkill /f /im explorer.exe
   start explorer
