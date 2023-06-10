@@ -2,6 +2,7 @@
 set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 setlocal enabledelayedexpansion
 powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/batbox.exe -OutFile '%temp%\batbox.exe'
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/getinput.exe -OutFile '%temp%\getinput.exe'
 set "batbox=%temp%\batbox.exe"
 set "getinput=%temp%\getinput.exe"
 Title Software Download
