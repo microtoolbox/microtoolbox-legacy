@@ -60,6 +60,11 @@ set "func_4_0=SIB"
 set "entrydata_4_1=               Activate StartIsBack           "
 set "func_4_1=ActivateSIB"
 
+set entries_6=0
+set "entrydata_6_0=                No notes available            "
+set "func_6_0=back"
+
+
 goto :home
 
 :install_windows
@@ -157,7 +162,12 @@ powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr http
 start "" "%WinDir%\Start11.exe"
 exit /b
 
-
+:back
+set /a arrayindex=arrayindex-1
+if !arrayindex! LSS 0 set arrayindex=0
+call set array=%%array!arrayindex!%%
+set entry=0
+goto :home
 
 
 
