@@ -3,7 +3,6 @@ setlocal enabledelayedexpansion
 powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/batbox.exe -OutFile '%temp%\batbox.exe'
 set "batbox=%temp%\batbox.exe"
 set "getinput=%temp%\getinput.exe"
-Mode 48,17
 Title Software Download
 "%Batbox%" /h 0
 set "array="
@@ -54,6 +53,12 @@ set "entrydata_3_1=               Activate with UAP              "
 set "func_3_1=UAP"
 set "entrydata_3_2=             Activate with AMTEmu             "
 set "func_3_2=AMTEmu"
+
+set entries_4=1
+set "entrydata_4_0=                Install StartIsBack           "
+set "func_4_0=SIB"
+set "entrydata_4_1=               Activate StartIsBack           "
+set "func_4_1=ActivateSIB"
 
 goto :home
 
@@ -163,6 +168,7 @@ exit /b
 
 :home
 cls
+Mode 48,17
 set /a centerentries=entries-7
 if %entry% LSS 7 (
   set /a entrystart=0
