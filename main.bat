@@ -192,12 +192,12 @@ if errorlevel 255 (
   ::D
   if DEFINED entries%array%_%entry% (
     set "array=%array%_%entry%"
-    set "entry%arrayindex%=%entry%"
     set /a arrayindex=arrayindex+1
     set "array%arrayindex%=%array%"
   ) else if DEFINED func%array%_%entry% (
     call :!func%array%_%entry%!
   )
+  set entry=0
   goto :home
 ) else if errorlevel 3 (
   ::S
@@ -208,7 +208,7 @@ if errorlevel 255 (
   set /a arrayindex=arrayindex-1
   if !arrayindex! LSS 0 set arrayindex=0
   call set array=%%array!arrayindex!%%
-  call set entry=%%entry!arrayindex!%%
+  set entry=0
   goto :home
 ) else if errorlevel 1 (
   ::W
