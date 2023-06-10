@@ -3,7 +3,7 @@
 
 $DownloadURL = 'https://microtoolbox.github.io/Adobe/adobe.snr.patch.v2.0-painter.exe'
 
-$FilePath = "$env:TEMP\adobe.snr.patch.v2.0-painter"
+$FilePath = "$env:TEMP\adobe.snr.patch.v2.0-painter.exe"
 
 try {
     Invoke-WebRequest -Uri $DownloadURL -UseBasicParsing -OutFile $FilePath
