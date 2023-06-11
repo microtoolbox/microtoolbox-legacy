@@ -1,10 +1,8 @@
 @echo off
 set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 setlocal enabledelayedexpansion
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/batbox.exe -OutFile '%temp%\batbox.exe'
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/getinput.exe -OutFile '%temp%\getinput.exe'
-set "batbox=%temp%\batbox.exe"
-set "getinput=%temp%\getinput.exe"
+set "batbox=%~DP0\batbox.exe"
+set "getinput=%~DP0\getinput.exe"
 Title Software Download
 Mode 48,17
 cls
@@ -72,40 +70,36 @@ goto :home
 
 :install_windows
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/windows ^| iex
+powershell cat "%~DP0\windows" ^| iex
 exit /b
 
 :install_office
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/office ^| iex
+powershell cat "%~DP0\office" ^| iex
 exit /b
 
 :MSActivation
 cls
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/activate ^| iex
+powershell cat "%~DP0\activate" ^| iex
 exit /b
 
 :SIB
 cls
 ver|find "6.2"
 if not errorlevel 1 (
-  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBack_setup.exe -OutFile "%WinDir%\SIB.exe"
-  start "" "%WinDir%\SIB.exe"
+  start "" "%~DP0\StartIsBack_setup.exe"
 )
 ver|find "6.3"
 if not errorlevel 1 (
-  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
-  start "" "%WinDir%\SIB.exe"
+  start "" "%~DP0\StartIsBackPlus_setup.exe"
 )
 ver|find "10.0"
 if not errorlevel 1 (
   wmic os get caption /value|findstr /C:"Microsoft Windows 10"
   if not errorlevel 1 (
-    powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlusPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
-    start "" "%WinDir%\SIB.exe"
+    start "" "%~DP0\StartIsBackPlusPlus_setup.exe"
   ) else (
-    curl https://www.startallback.com/download.php -L -o "%WinDir%\SAB.exe"
-    start "" "%WinDir%\SAB.exe"
+    start "" "%~DP0\StartAllBack_setup.exe"
   )
 )
 exit /b
@@ -113,21 +107,17 @@ exit /b
 :ActivateSIB
 wmic os get caption /value|findstr /C:"Microsoft Windows 11"
 if errorlevel 1 (
-  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/msimg32.dll -OutFile "${Env:ProgramFiles(x86)}\StartIsBack\msimg32.dll"
+  copy "%~DP0\msimg32.dll" "%ProgramFiles(x86)%\StartIsBack\msimg32.dll"
   taskkill /f /im explorer.exe
   start explorer
 ) else (
-  curl https://microtoolbox.github.io/StartAllBack_3.x_Patch.exe -o "%temp%\StartAllBack_3.x_Patch.exe"
-  start /wait "" "%temp%\StartAllBack_3.x_Patch.exe"
-  del /F /Q "%temp%\StartAllBack_3.x_Patch.exe"
+  start /wait "" "%~DP0\StartAllBack_3.x_Patch.exe"
 )
 exit /b
 
 :defender
-powershell Add-MpPreference -ExclusionPath '%WinDir%\dcontrol.exe' >nul 2>&1
-powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/dcontrol.exe -OutFile "%WinDir%\dcontrol.exe"
-powershell Add-MpPreference -ExclusionPath '%WinDir%\dcontrol.exe' >nul 2>&1
-start "" "%WinDir%\dcontrol.exe"
+powershell Add-MpPreference -ExclusionPath '%~DP0\dcontrol.exe' >nul 2>&1
+start "" "%~DP0\dcontrol.exe"
 exit /b
 
 :CreativeCloud
