@@ -64,12 +64,9 @@ set "func_4_0=SIB"
 set "entrydata_4_1=               Activate StartIsBack           "
 set "func_4_1=ActivateSIB"
 
-set entries_6=31
+set entries_6=0
 set "entrydata_6_0=                No notes available            "
 set "func_6_0=back"
-
-for /l %%i in (0,1,31) do set "entrydata_6_%%i=                %%i notes available            "
-for /l %%i in (0,1,9) do set "entrydata_6_%%i=                0%%i notes available            "
 
 goto :home
 
