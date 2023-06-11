@@ -173,6 +173,7 @@ set /a arrayindex=arrayindex-1
 if !arrayindex! LSS 0 set arrayindex=0
 call set array=%%array!arrayindex!%%
 set entry=0
+cls
 goto :home
 
 
@@ -188,7 +189,7 @@ set /a centerentries=entries%array%-7
 if %entry% LSS 7 (
   set /a entrystart=0
   set /a entryend=15
-) else if %entry% GTR %centerentries% (
+) else if %entry% GEQ %centerentries% (
   set /a entrystart=entries%array%-15
   set /a entryend=entries%array%
 ) else (
@@ -204,7 +205,7 @@ for /l %%i in (%entrystart%,1,%entryend%) do (
     "%Batbox%" /c 0x07 /a 124 /d "!entrydata%array%_%%i!" /a 124 /c 0x07
   )
 )
-"%batbox%" /g 0 16 /d "Up/Down=Navigate   Right=Enter   Left=Exit Menu"
+"%batbox%" /g 0 16 /d "Up/Down=Navigate    Right/Left=Enter/Leave Menu"
 call :getinput
 rem mshta.exe vbscript:Execute^("MsgBox ""Input type: %input%, %key%""&Chr(13)&Chr(10)&""Input pos: %row%,%col%"", vbOkOnly, ""title"""^)^(window.close^)
 if "%input%"=="0" (
@@ -214,10 +215,11 @@ if "%key%"=="295" (
     set "array=%array%_%entry%"
     set /a arrayindex=arrayindex+1
     set "array%arrayindex%=%array%"
+    set entry=0
+    cls
   ) else if DEFINED func%array%_%entry% (
     call :!func%array%_%entry%!
   )
-  set entry=0
 ) else if "%key%"=="296" (
   ::S
   if not "%entry%"=="!entries%array%!" set /a entry=entry+1
@@ -227,6 +229,7 @@ if "%key%"=="295" (
   if !arrayindex! LSS 0 set arrayindex=0
   call set array=%%array!arrayindex!%%
   set entry=0
+  cls
 ) else if "%key%"=="294" (
   ::W
   if not "%entry%"=="0" set /a entry=entry-1
