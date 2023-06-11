@@ -6,8 +6,6 @@ powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr http
 set "batbox=%temp%\batbox.exe"
 set "getinput=%temp%\getinput.exe"
 Title Software Download
-Mode 48,17
-cls
 "%Batbox%" /h 0
 set "array="
 set "array0="
@@ -64,12 +62,10 @@ set "func_4_0=SIB"
 set "entrydata_4_1=               Activate StartIsBack           "
 set "func_4_1=ActivateSIB"
 
-set entries_6=31
+set entries_6=0
 set "entrydata_6_0=                No notes available            "
 set "func_6_0=back"
 
-for /l %%i in (0,1,31) do set "entrydata_6_%%i=                %%i notes available            "
-for /l %%i in (0,1,9) do set "entrydata_6_%%i=                0%%i notes available            "
 
 goto :home
 
@@ -183,20 +179,21 @@ goto :home
 
 
 :home
-"%batbox%" /g 0 0
-set /a centerentries=entries%array%-7
+cls
+Mode 48,17
+set /a centerentries=entries-7
 if %entry% LSS 7 (
   set /a entrystart=0
   set /a entryend=15
 ) else if %entry% GTR %centerentries% (
-  set /a entrystart=entries%array%-15
-  set /a entryend=entries%array%
+  set /a entrystart=entries-15
+  set /a entryend=entries
 ) else (
   set /a entrystart=entry-7
   set /a entryend=entry+8
 )
 if %entrystart% LSS 0 set entrystart=0
-if %entryend% GTR %entries!array!% set entryend=%entries!array!%
+if %entryend% GTR %entries% set entryend=%entries%
 for /l %%i in (%entrystart%,1,%entryend%) do (
   if not %%i GTR !entries%array%! if "%%i"=="%entry%" (
     "%Batbox%" /c 0x70 /a 124 /d "!entrydata%array%_%%i!" /a 124 /c 0x07
@@ -204,11 +201,12 @@ for /l %%i in (%entrystart%,1,%entryend%) do (
     "%Batbox%" /c 0x07 /a 124 /d "!entrydata%array%_%%i!" /a 124 /c 0x07
   )
 )
-"%batbox%" /g 0 16 /d "Up/Down=Navigate   Right=Enter   Left=Exit Menu"
-call :getinput
-rem mshta.exe vbscript:Execute^("MsgBox ""Input type: %input%, %key%""&Chr(13)&Chr(10)&""Input pos: %row%,%col%"", vbOkOnly, ""title"""^)^(window.close^)
-if "%input%"=="0" (
-if "%key%"=="295" (
+"%batbox%" /g 0 16 /d "W=Up     S=Down     A=Back     D=Okay"
+choice /C WASD /N>nul
+if errorlevel 255 (
+  ::choice failure
+  goto :home
+) else if errorlevel 4 (
   ::D
   if DEFINED entries%array%_%entry% (
     set "array=%array%_%entry%"
@@ -218,24 +216,25 @@ if "%key%"=="295" (
     call :!func%array%_%entry%!
   )
   set entry=0
-) else if "%key%"=="296" (
+  goto :home
+) else if errorlevel 3 (
   ::S
   if not "%entry%"=="!entries%array%!" set /a entry=entry+1
-) else if "%key%"=="293" (
+  goto :home
+) else if errorlevel 2 (
   ::A
   set /a arrayindex=arrayindex-1
   if !arrayindex! LSS 0 set arrayindex=0
   call set array=%%array!arrayindex!%%
   set entry=0
-) else if "%key%"=="294" (
+  goto :home
+) else if errorlevel 1 (
   ::W
   if not "%entry%"=="0" set /a entry=entry-1
-)) else if "%input%"=="1" (
-  if "%row%"=="0" if not "%entrystart%"=="0" (
-    set /a entry=entry-7
-    if %entry% LSS 0 set entry=0
-    goto :home
-  )
+  goto :home
+) else if errorlevel 0 (
+  ::Ctrl+C
+  goto :home
 )
 goto :home
 
@@ -248,9 +247,11 @@ if %errorlevel% gtr 0 (
     set /A "input=-%errorlevel%, row=input >> 16, col=input & 0xFFFF"
     if !col! lss 32768 (
         set input=1
+        echo LEFT button clicked at !row!,!col!
     ) else (
         set /A col-=32768
         set input=2
+        echo RIGHT button clicked at !row!,!col!
     )
 )
 exit /b
