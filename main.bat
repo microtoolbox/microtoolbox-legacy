@@ -210,7 +210,7 @@ call :getinput
 rem mshta.exe vbscript:Execute^("MsgBox ""Input type: %input%, %key%""&Chr(13)&Chr(10)&""Input pos: %row%,%col%"", vbOkOnly, ""title"""^)^(window.close^)
 if "%input%"=="0" (
 if "%key%"=="295" (
-  ::D
+  ::Enter Menu
   if DEFINED entries%array%_%entry% (
     set "array=%array%_%entry%"
     set /a arrayindex=arrayindex+1
@@ -221,24 +221,44 @@ if "%key%"=="295" (
     call :!func%array%_%entry%!
   )
 ) else if "%key%"=="296" (
-  ::S
+  ::Down
   if not "%entry%"=="!entries%array%!" set /a entry=entry+1
 ) else if "%key%"=="293" (
-  ::A
+  ::Exit Menu
   set /a arrayindex=arrayindex-1
   if !arrayindex! LSS 0 set arrayindex=0
   call set array=%%array!arrayindex!%%
   set entry=0
   cls
 ) else if "%key%"=="294" (
-  ::W
+  ::Up
   if not "%entry%"=="0" set /a entry=entry-1
+) else if "%key%"=="27" (
+  ::Exit Menu or App
+  if "!array!"=="" exit /b
+  set /a arrayindex=arrayindex-1
+  if !arrayindex! LSS 0 set arrayindex=0
+  call set array=%%array!arrayindex!%%
+  set entry=0
+  cls
 )) else if "%input%"=="1" (
-  if "%row%"=="0" if not "%entrystart%"=="0" (
-    set /a entry=entry-7
-    if %entry% LSS 0 set entry=0
-    goto :home
+  ::Left Click, Enter/Move
+  set /a _entry=entrystart+row
+  if "!_entry!"=="!entry!" (
+    if DEFINED entries%array%_%entry% (
+      set "array=%array%_%entry%"
+      set /a arrayindex=arrayindex+1
+      set "array%arrayindex%=%array%"
+      set entry=0
+      cls
+    ) else if DEFINED func%array%_%entry% (
+      call :!func%array%_%entry%!
+    )
+  ) else (
+    set "entry=!_entry!
   )
+  set "_entry="
+  goto :home
 )
 goto :home
 
