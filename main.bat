@@ -41,15 +41,17 @@ set "func_1_0=install_office"
 set "entrydata_1_1=               Activate with MAS              "
 set "func_1_1=MSActivation"
 
-set entries_2=3
+set entries_2=4
 set "entrydata_2_0=               Install Adobe CC               "
 set "func_2_0=CreativeCloud"
 set "entrydata_2_1=              Activate with GenP              "
 set "func_2_1=GenP"
-set "entrydata_2_2=               Activate with UAP              "
-set "func_2_2=UAP"
-set "entrydata_2_3=             Activate with AMTEmu             "
-set "func_2_3=AMTEmu"
+set "entrydata_2_2=              Activate with GenP3             "
+set "func_2_2=GenP3"
+set "entrydata_2_3=               Activate with UAP              "
+set "func_2_3=UAP"
+set "entrydata_2_4=             Activate with AMTEmu             "
+set "func_2_4=AMTEmu"
 
 set entries_3=2
 set "entrydata_3_0=               Install Adobe CS6              "
