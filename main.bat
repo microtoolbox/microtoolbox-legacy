@@ -140,13 +140,13 @@ del /F /Q "%temp%\VMWare_Workstation_Pro.exe"
 exit /b
 
 :activate_vmware
-curl https://microtoolbox.github.io/vmwpkg.exe -o "%temp%\vmwpkg.exe"
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/vmwpkg.exe -OutFile "%temp%\vmwpkg.exe"
 start /wait "" "%temp%\vmwpkg.exe"
 del /F /Q "%temp%\vmwpkg.exe"
 exit /b
 
 :unlock_vmware
-curl https://microtoolbox.github.io/Unlocker.exe -o "%temp%\Unlocker.exe"
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/Unlocker.exe -OutFile "%temp%\Unlocker.exe"
 start /wait "" "%temp%\Unlocker.exe"
 del /F /Q "%temp%\Unlocker.exe"
 exit /b
@@ -241,8 +241,10 @@ if "%key%"=="295" (
     set /a arrayindex=arrayindex+1
     set "array%arrayindex%=%array%"
     set entry=0
+    cls
   ) else if DEFINED func%array%_%entry% (
     call :!func%array%_%entry%!
+    cls
   )
   cls
 ) else if "%key%"=="296" (
