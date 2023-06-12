@@ -213,10 +213,10 @@ if "%key%"=="295" (
     set /a arrayindex=arrayindex+1
     set "array%arrayindex%=%array%"
     set entry=0
-    cls
   ) else if DEFINED func%array%_%entry% (
     call :!func%array%_%entry%!
   )
+  cls
 ) else if "%key%"=="296" (
   ::Down
   if not "%entry%"=="!entries%array%!" set /a entry=entry+1
