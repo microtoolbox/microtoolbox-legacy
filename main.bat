@@ -53,7 +53,7 @@ set "func_2_3=AMTEmu"
 
 set entries_3=2
 set "entrydata_3_0=               Install Adobe CS6              "
-set "func_3_0=CreativeCloud"
+set "func_3_0=CreativeSuite6"
 set "entrydata_3_1=               Activate with UAP              "
 set "func_3_1=UAP"
 set "entrydata_3_2=             Activate with AMTEmu             "
