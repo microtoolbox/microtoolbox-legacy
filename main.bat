@@ -175,6 +175,11 @@ cls
 powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_genp ^| iex
 exit /b
 
+:GenP3
+cls
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_genp3 ^| iex
+exit /b
+
 :AMTEmu
 cls
 powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm https://microtoolbox.github.io/adobe_amtemu ^| iex
