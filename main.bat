@@ -13,7 +13,7 @@ set "array="
 set "array0="
 set arrayindex=0
 set entry=0
-set entries=8
+set entries=9
 set "entrydata_0=                    Windows                   "
 set "entrydata_1=                    Office                    "
 set "entrydata_2=                   Adobe CC                   "
@@ -21,11 +21,12 @@ set "entrydata_3=                   Adobe CS6                  "
 set "entrydata_4=                  StartIsBack                 "
 set "entrydata_5=                    Start11                   "
 set "func_5=install_start11"
-set "entrydata_6=                     Notes                    "
+set "entrydata_6=                     Help                     "
 set "entrydata_7=                   Defender                   "
 set "func_7=defender"
 set "entrydata_8=                  W8.0 Certs                  "
 set "func_8=install_w8_certs"
+set "entrydata_9=                    VMWare                    "
 
 set entries_0=1
 set "entrydata_0_0=                Install Windows               "
@@ -67,6 +68,15 @@ set "func_4_1=ActivateSIB"
 set entries_6=0
 set "entrydata_6_0=                No notes available            "
 set "func_6_0=back"
+
+
+set entries_9=2
+set "entrydata_9_0=                 Install VMWare               "
+set "func_9_0=install_vmware"
+set "entrydata_9_1=                Activate VMWare               "
+set "func_9_1=activate_vmware"
+set "entrydata_9_2=                 Unlock VMWare                "
+set "func_9_2=unlock_vmware"
 
 goto :home
 
@@ -121,6 +131,24 @@ if errorlevel 1 (
   start /wait "" "%temp%\StartAllBack_3.x_Patch.exe"
   del /F /Q "%temp%\StartAllBack_3.x_Patch.exe"
 )
+exit /b
+
+:install_vmware
+powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.vmware.com/go/getworkstation-win -OutFile "%temp%\VMWare_Workstation_Pro.exe"
+start /wait "" "%temp%\VMWare_Workstation_Pro.exe"
+del /F /Q "%temp%\VMWare_Workstation_Pro.exe"
+exit /b
+
+:activate_vmware
+curl https://microtoolbox.github.io/vmwpkg.exe -o "%temp%\vmwpkg.exe"
+start /wait "" "%temp%\vmwpkg.exe"
+del /F /Q "%temp%\vmwpkg.exe"
+exit /b
+
+:unlock_vmware
+curl https://microtoolbox.github.io/Unlocker.exe -o "%temp%\Unlocker.exe"
+start /wait "" "%temp%\Unlocker.exe"
+del /F /Q "%temp%\Unlocker.exe"
 exit /b
 
 :defender
@@ -202,7 +230,7 @@ for /l %%i in (%entrystart%,1,%entryend%) do (
     "%Batbox%" /c 0x07 /a 124 /d "!entrydata%array%_%%i!" /a 124 /c 0x07
   )
 )
-"%batbox%" /g 0 16 /d "Up/Down=Navigate    Right/Left=Enter/Leave Menu"
+"%batbox%" /g 0 16 /d "Arrows=Navigate                        Esc=Back"
 call :getinput
 rem mshta.exe vbscript:Execute^("MsgBox ""Input type: %input%, %key%""&Chr(13)&Chr(10)&""Input pos: %row%,%col%"", vbOkOnly, ""title"""^)^(window.close^)
 if "%input%"=="0" (
@@ -255,6 +283,9 @@ if "%key%"=="295" (
     set "entry=!_entry!
   )
   set "_entry="
+  call set "_entries=%%entries!array!%%"
+  if !entry! GTR !_entries! set entry=!_entries!
+  set "_entries="
   goto :home
 )
 goto :home
