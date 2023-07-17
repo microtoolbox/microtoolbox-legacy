@@ -237,11 +237,24 @@ for /l %%i in (%entrystart%,1,%entryend%) do (
     "%Batbox%" /c 0x07 /a 124 /d "!entrydata%array%_%%i!" /a 124 /c 0x07
   )
 )
-"%batbox%" /g 0 16 /d "Arrows=Navigate                        Esc=Back"
+"%batbox%" /g 0 16 /d "Arrows=Navigate               Enter=Ok Esc=Back"
 call :getinput
 rem mshta.exe vbscript:Execute^("MsgBox ""Input type: %input%, %key%""&Chr(13)&Chr(10)&""Input pos: %row%,%col%"", vbOkOnly, ""title"""^)^(window.close^)
 if "%input%"=="0" (
 if "%key%"=="295" (
+  ::Enter Menu
+  if DEFINED entries%array%_%entry% (
+    set "array=%array%_%entry%"
+    set /a arrayindex=arrayindex+1
+    set "array%arrayindex%=%array%"
+    set entry=0
+    cls
+  ) else if DEFINED func%array%_%entry% (
+    call :!func%array%_%entry%!
+    cls
+  )
+  cls
+) else if "%key%"=="13" (
   ::Enter Menu
   if DEFINED entries%array%_%entry% (
     set "array=%array%_%entry%"
