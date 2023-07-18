@@ -111,8 +111,8 @@ if not errorlevel 1 (
 )
 ver|find "10.0"
 if not errorlevel 1 (
-  wmic os get caption /value|findstr /C:"Microsoft Windows 10"
-  if not errorlevel 1 (
+  wmic os get caption /value|findstr /C:"Microsoft Windows 11"
+  if errorlevel 1 (
     powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://www.startisback.com/StartIsBackPlusPlus_setup.exe -OutFile "%WinDir%\SIB.exe"
     start "" "%WinDir%\SIB.exe"
   ) else (
