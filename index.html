@@ -40,17 +40,17 @@ function copyTextToClipboard(text) {
 To launch Micro Toolbox:<br>
 <ol style="padding-inline-start: 1em;" id="gui">
 <li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
-<li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/go|iex</code></li>
+<li>Type in <pre><code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/go|iex</code></pre></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
 <ol style="padding-inline-start: 1em;display:none;" id="auto">
 <li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
-<li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/auto|iex</code></li>
+<li>Type in <pre><code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/auto|iex</code></pre></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
 <ol style="padding-inline-start: 1em;display:none;" id="legacy">
 <li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
-<li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm microtoolbox.github.io/go|iex</code></li>
+<li>Type in <pre><code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm microtoolbox.github.io/go|iex</code></pre></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
 <input checked type="radio" name="mode" id="guiselect" onclick="document.getElementById('gui').style.display = '';document.getElementById('auto').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
