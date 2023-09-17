@@ -196,30 +196,32 @@ if defined DEVICEPREP (
   reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power /v HiberbootEnabled /t REG_DWORD /v 0
 )
 
-md "%TEMP%\Acropolis"
-curl --output "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" https://trials.adobe.com/AdobeProducts/APRO/Acrobat_HelpX/win32/Acrobat_DC_Web_x64_WWMUI.zip
-if not exist "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" (
+if defined DEVICEPREP (
+  md "%TEMP%\Acropolis"
+  curl --output "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" https://trials.adobe.com/AdobeProducts/APRO/Acrobat_HelpX/win32/Acrobat_DC_Web_x64_WWMUI.zip
+  if not exist "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" (
     echo Error: Failed to download Adobe Acrobat DC. Please check your internet connection, disable your Antivirus and try again.
-)
-curl --output "%TEMP%\Acropolis\AcrobatV.zip" https://cdn.discordapp.com/attachments/1070775413594402896/1151191799684137021/AcrobatV.zip
-if not exist "%TEMP%\Acropolis\AcrobatV.zip" (
+  )
+  curl --output "%TEMP%\Acropolis\AcrobatV.zip" https://cdn.discordapp.com/attachments/1070775413594402896/1151191799684137021/AcrobatV.zip
+  if not exist "%TEMP%\Acropolis\AcrobatV.zip" (
     echo Error: Failed to download Adobe Acrobat DC patch. Please check your internet connection, disable your Antivirus and try again.
     pause
     exit /b
+  )
+  tar -xf "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" -C "%TEMP%\Acropolis"
+  tar -xf "%TEMP%\Acropolis\AcrobatV.zip" -C "%TEMP%\Acropolis"
+  del /f "%TEMP%\Acropolis\AcrobatV.zip"
+  del /f "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip"
+  echo Installing Adobe Acrobat DC, uncheck genuine service, don't change anything else and don't close the installer.
+  echo After the installation, click FINISH!
+  "%TEMP%\Acropolis\Adobe Acrobat\setup.exe" /quiet
+  xcopy /y "%TEMP%\Acropolis\acrotray.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat\acrotray.exe"
+  xcopy /y "%TEMP%\Acropolis\Acrobat.dll" "C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.dll"
+  xcopy /y "%TEMP%\Acropolis\acrodistdll.dll" "C:\Program Files\Adobe\Acrobat DC\Acrobat\acrodistdll.dll"
+  sc config "AdobeARMservice" start= disabled
+  sc stop "AdobeARMservice"
+  rmdir /s /q "%TEMP%\Acropolis"
 )
-tar -xf "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" -C "%TEMP%\Acropolis"
-tar -xf "%TEMP%\Acropolis\AcrobatV.zip" -C "%TEMP%\Acropolis"
-del /f "%TEMP%\Acropolis\AcrobatV.zip"
-del /f "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip"
-echo Installing Adobe Acrobat DC, uncheck genuine service, don't change anything else and don't close the installer.
-echo After the installation, click FINISH!
-"%TEMP%\Acropolis\Adobe Acrobat\setup.exe" /quiet
-xcopy /y "%TEMP%\Acropolis\acrotray.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat\acrotray.exe"
-xcopy /y "%TEMP%\Acropolis\Acrobat.dll" "C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.dll"
-xcopy /y "%TEMP%\Acropolis\acrodistdll.dll" "C:\Program Files\Adobe\Acrobat DC\Acrobat\acrodistdll.dll"
-sc config "AdobeARMservice" start= disabled
-sc stop "AdobeARMservice"
-rmdir /s /q "%TEMP%\Acropolis"
 
 if defined DEVICEPREP (
   reg add "HKLM\Software\Tech Stuff\WinQuickSetup" /v "DeviceState" /t REG_DWORD /d "1" /f
