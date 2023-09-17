@@ -120,7 +120,7 @@ Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Start8\RightOrder10" /v "2
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Start8\RightOrder10" /v "96" /t REG_SZ /d "6" /f
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Start8\RightOrder10" /v "14" /t REG_SZ /d "7" /f
 if defined DEVICEPREP (
-  Add-MpPreference -ExclusionPath "%windir%\Start11.exe"
+  powershell Add-MpPreference -ExclusionPath "%windir%\Start11.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/Start11.exe  -OutFile "${Env:WinDir}\Start11.exe"
   start /wait "" "%WinDir%\Start11.exe" /S
 )
