@@ -38,13 +38,6 @@ function copyTextToClipboard(text) {
 }
 </script>
 To launch Micro Toolbox:<br>
-<input checked type="radio" name="mode" id="guiselect" onclick="document.getElementById('gui').style.display = '';document.getElementById('auto').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
-<label for="guiselect">GUI Mode</label>
-<input type="radio" name="mode" id="autoselect" onclick="document.getElementById('auto').style.display = '';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
-<label for="autoselect">Auto install Mode</label>
-<input type="radio" name="mode" id="legacyselect" onclick="document.getElementById('auto').style.display = 'none';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = '';">
-<label for="legacyselect">Legacy Mode</label>
-<br>
 <ol style="padding-inline-start: 1em;" id="gui">
 <li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
 <li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/go|iex</code></li>
@@ -60,6 +53,13 @@ To launch Micro Toolbox:<br>
 <li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm microtoolbox.github.io/go|iex</code></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
+<input checked type="radio" name="mode" id="guiselect" onclick="document.getElementById('gui').style.display = '';document.getElementById('auto').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
+<label for="guiselect">GUI Mode</label>
+<input type="radio" name="mode" id="autoselect" onclick="document.getElementById('auto').style.display = '';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
+<label for="autoselect">Auto Mode</label>
+<input type="radio" name="mode" id="legacyselect" onclick="document.getElementById('auto').style.display = 'none';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = '';">
+<label for="legacyselect">Legacy Mode</label>
+<br>
 <div>If you need older Windows versions, get the <a href="https://archive.org/details/msaio_202207">Microsoft All-in-one</a></div>
 <div><a href="/Lists/All (202).txt">Here</a> is a list of all software in the Microsoft All-in-one</div>
 <div>Here's lists for the individual discs: <a href="/Lists/Windows Disc 1 List (63).txt">Disc 1</a> <a href="/Lists/Windows Disc 2 List (53).txt">Disc 2</a> <a href="/Lists/Windows Disc 3 List (36).txt">Disc 3</a></div>
