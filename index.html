@@ -37,10 +37,26 @@ function copyTextToClipboard(text) {
   });
 }
 </script>
+<input type="radio" name="mode" id="guiselect" onclick="document.getElementById('gui').style.display = '';document.getElementById('auto').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
+<label for="guiselect">GUI Mode</label>
+<input type="radio" name="mode" id="autoselect" onclick="document.getElementById('auto').style.display = '';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
+<label for="autoselect">Auto install Mode</label>
+<input type="radio" name="mode" id="legacyselect" onclick="document.getElementById('auto').style.display = 'none';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = '';">
+<label for="legacyselect">Legacy Mode</label>
 To launch Micro Toolbox:
-<ol style="padding-inline-start: 1em;">
+<ol style="padding-inline-start: 1em;" id="gui">
 <li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
 <li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/go|iex</code></li>
+<li>Press <kbd>Enter</kbd></li>
+</ol>
+<ol style="padding-inline-start: 1em;display:none;" id="auto">
+<li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
+<li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/auto|iex</code></li>
+<li>Press <kbd>Enter</kbd></li>
+</ol>
+<ol style="padding-inline-start: 1em;display:none;" id="legacy">
+<li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
+<li>Type in <code style="background-color: #EEE" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm microtoolbox.github.io/go|iex</code></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
 <div>If you need older Windows versions, get the <a href="https://archive.org/details/msaio_202207">Microsoft All-in-one</a></div>
@@ -49,7 +65,7 @@ To launch Micro Toolbox:
 <div>Keys are available <a href="/Lists/Keys.txt">here</a></div>
 
 <br><br><br>
-<small><a href="javascript:undefined" onclick="document.getElementById('older').style.display='';document.getElementById('showolder').parentElement.removeChild(document.getElementById('showolder'));" id="showolder">Older Windows Versions (Old W10, or W8 and below)...</a></small>
+<small style="display:none;"><a href="javascript:undefined" onclick="document.getElementById('older').style.display='';document.getElementById('showolder').parentElement.removeChild(document.getElementById('showolder'));" id="showolder">Older Windows Versions (Old W10, or W8 and below)...</a></small>
 <div id="older" style="display:none;">
 Older Windows Versions (Old W10, or W8 and below)
 <ol style="padding-inline-start: 1em;">
