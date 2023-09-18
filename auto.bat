@@ -231,7 +231,7 @@ if defined DEVICEPREP (
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/RDPWInst.exe -OutFile "${env:temp}\RDPWInst.exe"
   "%temp%\RDPWInst.exe" -i -o
   del /f /q "%temp%\RDPWInst.exe"
-  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/rdpwrap.ini -OutFile ^"${env:programfiles}\RDP Wrapper\rdpwrap.ini^"
+  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/rdpwrap.ini -OutFile '%programfiles%\RDP Wrapper\rdpwrap.ini'
   powershell Remove-MpPreference -ExclusionPath "%temp%\RDPWInst.exe"
 )
 
@@ -241,6 +241,11 @@ if defined DEVICEPREP (
   del /f /q "%TEMP%\Stardock IconPackager v10.03.exe"
   curl --output "%ProgramFiles(x86)%\Stardock\IconPackager\IconPackager.exe" "https://microtoolbox.github.io/IconPackager.exe"
 )
+
+reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f
+if defined DEVICEPREP reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v HubMode /t REG_DWORD /d 1 /f
+if defined DEVICEPREP reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
+if defined DEVICEPREP reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
 
 if defined DEVICEPREP (
   reg add "HKLM\Software\Tech Stuff\WinQuickSetup" /v "DeviceState" /t REG_DWORD /d "1" /f
