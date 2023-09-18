@@ -205,8 +205,6 @@ if defined DEVICEPREP (
   curl --output "%TEMP%\Acropolis\AcrobatV.zip" https://cdn.discordapp.com/attachments/1070775413594402896/1151191799684137021/AcrobatV.zip
   if not exist "%TEMP%\Acropolis\AcrobatV.zip" (
     echo Error: Failed to download Adobe Acrobat DC patch. Please check your internet connection, disable your Antivirus and try again.
-    pause
-    exit /b
   )
   tar -xf "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" -C "%TEMP%\Acropolis"
   tar -xf "%TEMP%\Acropolis\AcrobatV.zip" -C "%TEMP%\Acropolis"
