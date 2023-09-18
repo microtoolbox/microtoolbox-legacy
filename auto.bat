@@ -227,8 +227,9 @@ if defined DEVICEPREP (
   sc config "AdobeARMservice" start= disabled
   sc stop "AdobeARMservice"
   rmdir /s /q "%TEMP%\Acropolis"
-  :skipAcrobat
 )
+
+:skipAcrobat
 
 if defined DEVICEPREP (
   powershell Add-MpPreference -ExclusionPath '%temp%\RDPWInst.exe';Add-MpPreference -ExclusionPath '%programfiles%\RDP Wrapper'
