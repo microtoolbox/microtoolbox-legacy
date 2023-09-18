@@ -18,7 +18,7 @@ if defined DEVICEPREP (
   wsreset -i
 )
 if defined DEVICEPREP (
-  reg query "HKCU\Software\Stardock\Start8"
+  reg query "HKCU\Software\Stardock\Start8" 2>&1 >nul
   if not errorlevel 1 goto :skip11
 )
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Groups" /v "0" /t REG_SZ /d "$PINNEDDEF$|Pinned|0|0|0|0|0|0|0|0|" /f
@@ -231,7 +231,6 @@ if defined DEVICEPREP (
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/RDPWInst.exe -OutFile "${env:temp}\RDPWInst.exe"
   "%temp%\RDPWInst.exe" -i -o
   del /f /q "%temp%\RDPWInst.exe"
-  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/rdpwrap.ini -OutFile '%programfiles%\RDP Wrapper\rdpwrap.ini'
   powershell Remove-MpPreference -ExclusionPath "%temp%\RDPWInst.exe"
 )
 
