@@ -241,6 +241,17 @@ if defined DEVICEPREP (
   curl --output "%ProgramFiles(x86)%\Stardock\IconPackager\IconPackager.exe" "https://microtoolbox.github.io/IconPackager.exe"
 )
 
+if defined DEVICEPREP (
+  curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://files.catbox.moe/8d4ejv.com"
+  start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
+  del /f /q "%TEMP%\WindowBlinds11_setup.exe"
+  curl --output "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
+  curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
+  start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
+  del /f /q "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
+  del /f /q "%TEMP%\autocrack.exe"
+)
+
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f
 if defined DEVICEPREP reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v HubMode /t REG_DWORD /d 1 /f
 if defined DEVICEPREP reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
