@@ -227,6 +227,30 @@ if defined DEVICEPREP (
 )
 
 if defined DEVICEPREP (
+  powershell Add-MpPreference -ExclusionPath "%temp%\RDPWInst.exe";Add-MpPreference -ExclusionPath "%programfiles%\RDP Wrapper\"
+  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/RDPWInst.exe -OutFile "${env:temp}\RDPWInst.exe"
+  "%temp%\RDPWInst.exe" -i -o
+  del /f /q "%temp%\RDPWInst.exe"
+  powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/rdpwrap.ini -OutFile "${env:programfiles}\RDP Wrapper\rdpwrap.ini"
+  powershell Remove-MpPreference -ExclusionPath "%temp%\RDPWInst.exe"
+)
+
+if defined DEVICEPREP (
+  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk001" "https://microtoolbox.github.io/Stardock IconPackager v10.03.exe.chunk001"
+  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk002" "https://microtoolbox.github.io/Stardock IconPackager v10.03.exe.chunk002"
+  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk003" "https://microtoolbox.github.io/Stardock IconPackager v10.03.exe.chunk003"
+  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk004" "https://microtoolbox.github.io/Stardock IconPackager v10.03.exe.chunk004"
+  copy /b "%temp%\Stardock IconPackager v10.03.exe.chunk001"+"%temp%\Stardock IconPackager v10.03.exe.chunk002"+"%temp%\Stardock IconPackager v10.03.exe.chunk003"+"%temp%\Stardock IconPackager v10.03.exe.chunk004" "%temp%\Stardock IconPackager v10.03.exe"
+  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk001"
+  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk002"
+  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk003"
+  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk004"
+  start /wait "" "%TEMP%\Stardock IconPackager v10.03.exe" /S
+  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe"
+  curl --output "%ProgramFiles(x86)%\Stardock\IconPackager\IconPackager.exe" "https://microtoolbox.github.io/IconPackager.exe"
+)
+
+if defined DEVICEPREP (
   reg add "HKLM\Software\Tech Stuff\WinQuickSetup" /v "DeviceState" /t REG_DWORD /d "1" /f
 )
 shutdown /f /r /t 0
