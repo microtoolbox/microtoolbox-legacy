@@ -214,7 +214,7 @@ if defined DEVICEPREP (
   del /f "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip"
   echo Installing Adobe Acrobat DC, uncheck genuine service, don't change anything else and don't close the installer.
   echo After the installation, click FINISH!
-  "%TEMP%\Acropolis\Adobe Acrobat\setup.exe" /sAll
+  "%TEMP%\Acropolis\Adobe Acrobat\setup.exe" /sPB
   xcopy /y "%TEMP%\Acropolis\acrotray.exe" "C:\Program Files\Adobe\Acrobat DC\Acrobat\acrotray.exe"
   xcopy /y "%TEMP%\Acropolis\Acrobat.dll" "C:\Program Files\Adobe\Acrobat DC\Acrobat\Acrobat.dll"
   xcopy /y "%TEMP%\Acropolis\acrodistdll.dll" "C:\Program Files\Adobe\Acrobat DC\Acrobat\acrodistdll.dll"
