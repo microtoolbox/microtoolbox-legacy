@@ -17,6 +17,10 @@ if defined DEVICEPREP (
   powershell -ec JgAgACgAWwBTAGMAcgBpAHAAdABCAGwAbwBjAGsAXQA6ADoAQwByAGUAYQB0AGUAKAAoAGkAcgBtACAAaAB0AHQAcABzADoALwAvAG0AYQBzAHMAZwByAGEAdgBlAC4AZABlAHYALwBnAGUAdAApACkAKQAgAC8ASABXAEkARAAgAC8ASwBNAFMALQBXAGkAbgBkAG8AdwBzAE8AZgBmAGkAYwBlACAALwBLAE0AUwAtAEEAYwB0AEEAbgBkAFIAZQBuAGUAdwBhAGwAVABhAHMAawA=
   wsreset -i
 )
+if defined DEVICEPREP (
+  reg query "HKCU\Software\Stardock\Start8"
+  if not errorlevel 1 goto :skip11
+)
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Groups" /v "0" /t REG_SZ /d "$PINNEDDEF$|Pinned|0|0|0|0|0|0|0|0|" /f
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Groups11" /v "0" /t REG_SZ /d "$$APPS$$|Pinned|0|0|0|0|0|0|0|0|" /f
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Right" /v "6" /t REG_SZ /d "0" /f
@@ -124,6 +128,7 @@ if defined DEVICEPREP (
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/Start11.exe  -OutFile "${Env:WinDir}\Start11.exe"
   start /wait "" "%WinDir%\Start11.exe" /S
 )
+:skip11
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowTaskViewButton" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced\People" /v "PeopleBand" /t REG_DWORD /d "0" /f
