@@ -1,5 +1,5 @@
 @echo off &chcp 850 >nul &pushd "%~dp0"
-reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v DeviceState | find "0x1" >nul 2>&1
+reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v DeviceState 2>&1 | find "0x1"
 if errorlevel 1 set DEVICEPREP=1
 if defined DEVICEPREP echo Performing device setup...
 if not defined DEVICEPREP echo Performing user setup...
@@ -7,6 +7,8 @@ if defined DEVICEPREP (
   @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 )
 if defined DEVICEPREP (
+  reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v SkipOffice 2>&1 | find "0x1"
+  if not errorlevel 1 goto :skipoffice
   powershell Add-MpPreference -ExclusionPath "%temp%\odt.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/odt.exe -OutFile "${env:temp}\odt.exe"
   echo.^<Configuration^>^<Add OfficeClientEdition="64" Channel="Current"^>^<Product ID="MondoRetail"^>^<Language ID="en-US" /^>^<ExcludeApp ID="Groove" /^>^<ExcludeApp ID="Lync" /^>^<ExcludeApp ID="OneDrive" /^>^<ExcludeApp ID="Teams" /^>^</Product^>^</Add^>^<Display Level="Full" AcceptEULA="TRUE" /^>^<Updates Enabled="TRUE" Channel="Current" /^>^</Configuration^> > "%temp%\odtcfg.xml"
@@ -14,6 +16,7 @@ if defined DEVICEPREP (
   del "%temp%\odtcfg.xml"
   del "%temp%\odt.exe"
   powershell Remove-MpPreference -ExclusionPath "%temp%\setup.exe"
+  :skipoffice
   powershell -ec JgAgACgAWwBTAGMAcgBpAHAAdABCAGwAbwBjAGsAXQA6ADoAQwByAGUAYQB0AGUAKAAoAGkAcgBtACAAaAB0AHQAcABzADoALwAvAG0AYQBzAHMAZwByAGEAdgBlAC4AZABlAHYALwBnAGUAdAApACkAKQAgAC8ASABXAEkARAAgAC8ASwBNAFMALQBXAGkAbgBkAG8AdwBzAE8AZgBmAGkAYwBlACAALwBLAE0AUwAtAEEAYwB0AEEAbgBkAFIAZQBuAGUAdwBhAGwAVABhAHMAawA=
   wsreset -i
 )
