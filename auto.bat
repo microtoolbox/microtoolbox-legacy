@@ -7,8 +7,7 @@ if defined DEVICEPREP (
   @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 )
 if defined DEVICEPREP (
-  choice /T 30 /D y /M "Install Office?"
-  if errorlevel 2 if not errorlevel 3 goto :skipOffice
+  if defined TEKDEV goto :skipOffice
   powershell Add-MpPreference -ExclusionPath "%temp%\odt.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/odt.exe -OutFile "${env:temp}\odt.exe"
   echo.^<Configuration^>^<Add OfficeClientEdition="64" Channel="Current"^>^<Product ID="MondoRetail"^>^<Language ID="en-US" /^>^<ExcludeApp ID="Groove" /^>^<ExcludeApp ID="Lync" /^>^<ExcludeApp ID="OneDrive" /^>^<ExcludeApp ID="Teams" /^>^</Product^>^</Add^>^<Display Level="Full" AcceptEULA="TRUE" /^>^<Updates Enabled="TRUE" Channel="Current" /^>^</Configuration^> > "%temp%\odtcfg.xml"
@@ -205,8 +204,7 @@ if defined DEVICEPREP (
 )
 
 if defined DEVICEPREP (
-  choice /T 30 /D y /M "Install Adobe Acrobat?"
-  if errorlevel 2 if not errorlevel 3 goto :skipAcrobat
+  if defined TEKDEV goto :skipAcrobat
   md "%TEMP%\Acropolis"
   curl --output "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" https://trials.adobe.com/AdobeProducts/APRO/Acrobat_HelpX/win32/Acrobat_DC_Web_x64_WWMUI.zip
   if not exist "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" (
