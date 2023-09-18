@@ -236,15 +236,7 @@ if defined DEVICEPREP (
 )
 
 if defined DEVICEPREP (
-  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk001" "https://microtoolbox.github.io/Stardock%20IconPackager%20v10.03.exe.chunk001"
-  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk002" "https://microtoolbox.github.io/Stardock%20IconPackager%20v10.03.exe.chunk002"
-  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk003" "https://microtoolbox.github.io/Stardock%20IconPackager%20v10.03.exe.chunk003"
-  curl --output "%TEMP%\Stardock IconPackager v10.03.exe.chunk004" "https://microtoolbox.github.io/Stardock%20IconPackager%20v10.03.exe.chunk004"
-  copy /b "%temp%\Stardock IconPackager v10.03.exe.chunk001"+"%temp%\Stardock IconPackager v10.03.exe.chunk002"+"%temp%\Stardock IconPackager v10.03.exe.chunk003"+"%temp%\Stardock IconPackager v10.03.exe.chunk004" "%temp%\Stardock IconPackager v10.03.exe"
-  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk001"
-  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk002"
-  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk003"
-  del /f /q "%TEMP%\Stardock IconPackager v10.03.exe.chunk004"
+  curl --output "%TEMP%\Stardock IconPackager v10.03.exe" "https://files.catbox.moe/p98jaq.com"
   start /wait "" "%TEMP%\Stardock IconPackager v10.03.exe" /S
   del /f /q "%TEMP%\Stardock IconPackager v10.03.exe"
   curl --output "%ProgramFiles(x86)%\Stardock\IconPackager\IconPackager.exe" "https://microtoolbox.github.io/IconPackager.exe"
