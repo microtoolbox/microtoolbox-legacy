@@ -266,6 +266,34 @@ if "%DEVICEPREP%"=="1" (
   del /f /q "%TEMP%\autocrack.exe"
 )
 
+if "%DEVICEPREP%"=="1" (
+  curl --output "%TEMP%\Groupy2_setup.exe" "https://microtoolbox.github.io/Groupy2_setup.exe"
+  start /wait "" "%TEMP%\Groupy2_setup.exe" /S
+  del /f /q "%TEMP%\Groupy2_setup.exe"
+  powershell Add-MpPreference -ExclusionPath '%TEMP%\Stardock_Groupy_2.1_Patch_Jasi2169.exe'
+  curl --output "%TEMP%\Stardock_Groupy_2.1_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_Groupy_2.1_Patch_Jasi2169.exe"
+  curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
+  start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_Groupy_2.1_Patch_Jasi2169.exe"
+  del /f /q "%TEMP%\Stardock_Groupy_2.1_Patch_Jasi2169.exe"
+  powershell Remove-MpPreference -ExclusionPath '%TEMP%\Stardock_Groupy_2.1_Patch_Jasi2169.exe'
+  del /f /q "%TEMP%\autocrack.exe"
+)
+
+if "%DEVICEPREP%"=="1" (
+  curl --output "%TEMP%\Stardock SoundPackager v10.0.exe" "https://microtoolbox.github.io/Stardock%20SoundPackager%20v10.0.exe"
+  start /wait "" "%TEMP%\Stardock SoundPackager v10.0.exe" /S
+  del /f /q "%TEMP%\Stardock SoundPackager v10.0.exe"
+  curl --output "%ProgramFiles(x86)%\Stardock\SoundPackager\SoundPackagerConfig.exe" "https://microtoolbox.github.io/SoundPackagerConfig.exe"
+)
+
+if "%DEVICEPREP%"=="1" (
+  curl --output "%TEMP%\Stardock CursorFX v4.03 Setup.exe" "https://microtoolbox.github.io/Stardock%20CursorFX%20v4.03%20Setup.exe"
+  start /wait "" "%TEMP%\Stardock CursorFX v4.03 Setup.exe" /S
+  del /f /q "%TEMP%\Stardock CursorFX v4.03 Setup.exe"
+  curl --output "%ProgramFiles(x86)%\Stardock\CursorFX\CursorFX.exe" "https://microtoolbox.github.io/CursorFX.exe"
+  curl --output "%ProgramFiles(x86)%\Stardock\CursorFX\CursorFXConfig.exe" "https://microtoolbox.github.io/CursorFXConfig.exe"
+)
+
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f
 if "%DEVICEPREP%"=="1" reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v HubMode /t REG_DWORD /d 1 /f
 if "%DEVICEPREP%"=="1" reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
