@@ -1,14 +1,8 @@
 @echo off &chcp 850 >nul &pushd "%~dp0"
 reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v DeviceState 2>&1 | find "0x1"
 if errorlevel 1 set DEVICEPREP=1
-:parseArgs
-if "%~1"=="" goto :argsParsed
-set "%~1=%~2"
-shift /1
-shift /1
-goto :parseArgs
-:argsParsed
-if "%STARDOCKONLY%"=="1" goto :stardock
+if "%FORCEPREP%"=="1" set DEVICEPREP=1
+if "%FORCEPREP%"=="0" set DEVICEPREP=0
 if "%DEVICEPREP%"=="1" echo Performing device setup...
 if not "%DEVICEPREP%"=="1" echo Performing user setup...
 if "%DEVICEPREP%"=="1" (
@@ -247,8 +241,6 @@ if "%DEVICEPREP%"=="1" (
   powershell Remove-MpPreference -ExclusionPath "%temp%\RDPWInst.exe"
 )
 
-:starDock
-
 if "%DEVICEPREP%"=="1" (
   curl --output "%TEMP%\Stardock IconPackager v10.03.exe" "https://files.catbox.moe/p98jaq.com"
   start /wait "" "%TEMP%\Stardock IconPackager v10.03.exe" /S
@@ -305,5 +297,4 @@ if "%DEVICEPREP%"=="1" reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Micros
 if "%DEVICEPREP%"=="1" (
   reg add "HKLM\Software\Tech Stuff\WinQuickSetup" /v "DeviceState" /t REG_DWORD /d "1" /f
 )
-shutdown /f /r /t 0
-exit /b
+del /f /q "%~F0"&shutdown /f /r /t 0&exit /b

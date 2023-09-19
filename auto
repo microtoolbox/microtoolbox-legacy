@@ -13,8 +13,5 @@ try {
 }
 
 if (Test-Path $FilePath) {
-    powershell -w h -c exit
-    Start-Process -FilePath $FilePath -ArgumentList $args -Wait
-    $item = Get-Item -LiteralPath $FilePath
-    $item.Delete()
+    Start-Process -FilePath $FilePath
 }
