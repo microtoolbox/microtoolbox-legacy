@@ -3,17 +3,18 @@ reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v DeviceState 2>&1 | find "0
 if errorlevel 1 set DEVICEPREP=1
 :parseArgs
 if "%~1"=="" goto :argsParsed
-set "%~1"
+set "%~1=%~2"
+shift /1
 shift /1
 goto :parseArgs
 :argsParsed
-if defined DEVICEPREP echo Performing device setup...
-if not defined DEVICEPREP echo Performing user setup...
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" echo Performing device setup...
+if not "%DEVICEPREP%"=="1" echo Performing user setup...
+if "%DEVICEPREP%"=="1" (
   @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 )
-if defined DEVICEPREP (
-  if defined TEKDEV goto :skipOffice
+if "%DEVICEPREP%"=="1" (
+  if "%TEKDEV%"=="1" goto :skipOffice
   powershell Add-MpPreference -ExclusionPath "%temp%\odt.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/odt.exe -OutFile "${env:temp}\odt.exe"
   echo.^<Configuration^>^<Add OfficeClientEdition="64" Channel="Current"^>^<Product ID="MondoRetail"^>^<Language ID="en-US" /^>^<ExcludeApp ID="Groove" /^>^<ExcludeApp ID="Lync" /^>^<ExcludeApp ID="OneDrive" /^>^<ExcludeApp ID="Teams" /^>^</Product^>^</Add^>^<Display Level="Full" AcceptEULA="TRUE" /^>^<Updates Enabled="TRUE" Channel="Current" /^>^</Configuration^> > "%temp%\odtcfg.xml"
@@ -25,7 +26,7 @@ if defined DEVICEPREP (
   powershell -ec JgAgACgAWwBTAGMAcgBpAHAAdABCAGwAbwBjAGsAXQA6ADoAQwByAGUAYQB0AGUAKAAoAGkAcgBtACAAaAB0AHQAcABzADoALwAvAG0AYQBzAHMAZwByAGEAdgBlAC4AZABlAHYALwBnAGUAdAApACkAKQAgAC8ASABXAEkARAAgAC8ASwBNAFMALQBXAGkAbgBkAG8AdwBzAE8AZgBmAGkAYwBlACAALwBLAE0AUwAtAEEAYwB0AEEAbgBkAFIAZQBuAGUAdwBhAGwAVABhAHMAawA=
   wsreset -i
 )
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" (
   reg query "HKCU\Software\Stardock\Start8" 2>&1 >nul
   if not errorlevel 1 goto :skip11
 )
@@ -131,7 +132,7 @@ Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Start8\RightOrder10" /v "1
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Start8\RightOrder10" /v "2" /t REG_SZ /d "5" /f
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Start8\RightOrder10" /v "96" /t REG_SZ /d "6" /f
 Reg.exe add "HKCU\Software\Stardock\Start8\Start8.ini\Start8\RightOrder10" /v "14" /t REG_SZ /d "7" /f
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" (
   powershell Add-MpPreference -ExclusionPath "%windir%\Start11.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/Start11.exe  -OutFile "${Env:WinDir}\Start11.exe"
   start /wait "" "%WinDir%\Start11.exe" /S
@@ -147,7 +148,7 @@ Reg.exe add "HKCU\Control Panel\International" /v "sLongDate" /t REG_SZ /d "dddd
 Reg.exe add "HKCU\Control Panel\International" /v "sShortDate" /t REG_SZ /d "ddd d MMM yyyy" /f
 Reg.exe add "HKCU\Control Panel\International" /v "sTimeFormat" /t REG_SZ /d "hh:mm:ss tt" /f
 Reg.exe add "HKCU\Control Panel\International" /v "sShortTime" /t REG_SZ /d "hh:mm:ss tt" /f
-if defined DEVICEPREP (
+if defined "%DEVICEPREP%"=="1" (
   powershell Add-MpPreference -ExclusionPath "%temp%\ninite_auto.exe";Add-MpPreference -ExclusionPath "%temp%\ninite_auto_helper.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/ninite_auto.exe  -OutFile "${env:temp}\ninite_auto.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/ninite_auto_helper.exe  -OutFile "${env:temp}\ninite_auto_helper.exe"
@@ -157,7 +158,7 @@ if defined DEVICEPREP (
   del /f /q "%temp%\ninite_auto_helper.exe"
   powershell Remove-MpPreference -ExclusionPath "%temp%\ninite_auto.exe";Remove-MpPreference -ExclusionPath "%temp%\ninite_auto_helper.exe"
 )
-if defined DEVICEPREP (
+if defined "%DEVICEPREP%"=="1" (
   curl https://files.catbox.moe/5gcncm.png -o "%windir%\bg.png"
 )
 powershell -ec QQBkAGQALQBUAHkAcABlACAALQBUAHkAcABlAEQAZQBmAGkAbgBpAHQAaQBvAG4AIAAnAHUAcwBpAG4AZwAgAFMAeQBzAHQAZQBtAC4AUgB1AG4AdABpAG0AZQAuAEkAbgB0AGUAcgBvAHAAUwBlAHIAdgBpAGMAZQBzADsAcAB1AGIAbABpAGMAIABjAGwAYQBzAHMAIABXAGEAbABsAHAAYQBwAGUAcgB7AFsARABsAGwASQBtAHAAbwByAHQAKAAiAHUAcwBlAHIAMwAyAC4AZABsAGwAIgAsACAAUwBlAHQATABhAHMAdABFAHIAcgBvAHIAIAA9ACAAdAByAHUAZQAsACAAQwBoAGEAcgBTAGUAdAAgAD0AIABDAGgAYQByAFMAZQB0AC4AQQB1AHQAbwApAF0AcAByAGkAdgBhAHQAZQAgAHMAdABhAHQAaQBjACAAZQB4AHQAZQByAG4AIABpAG4AdAAgAFMAeQBzAHQAZQBtAFAAYQByAGEAbQBlAHQAZQByAHMASQBuAGYAbwAoAGkAbgB0ACAAdQBBAGMAdABpAG8AbgAsACAAaQBuAHQAIAB1AFAAYQByAGEAbQAsACAAcwB0AHIAaQBuAGcAIABsAHAAdgBQAGEAcgBhAG0ALAAgAGkAbgB0ACAAZgB1AFcAaQBuAEkAbgBpACkAOwBwAHUAYgBsAGkAYwAgAHMAdABhAHQAaQBjACAAdgBvAGkAZAAgAFMAZQB0AFcAYQBsAGwAcABhAHAAZQByACgAcwB0AHIAaQBuAGcAIABwAGEAdABoACkAewBTAHkAcwB0AGUAbQBQAGEAcgBhAG0AZQB0AGUAcgBzAEkAbgBmAG8AKAAyADAALAAgADAALAAgAHAAYQB0AGgALAAgADMAKQA7AH0AfQAnADsAWwBXAGEAbABsAHAAYQBwAGUAcgBdADoAOgBTAGUAdABXAGEAbABsAHAAYQBwAGUAcgAoACQAZQBuAHYAOgB3AGkAbgBkAGkAcgAgACsAIAAiAFwAYgBnAC4AcABuAGcAIgApAA==
@@ -167,10 +168,10 @@ Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Association
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "EnableWebContentEvaluation" /t REG_DWORD /d "1" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\AppHost" /v "PreventOverride" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Edge\SmartScreenEnabled" /v "(Default)" /t REG_SZ /d "0" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "SmartScreenEnabled" /t REG_SZ /d "Off" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338393Enabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Privacy" /v "TailoredExperiencesWithDiagnosticDataEnabled" /t REG_DWORD /d "0" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableActivityFeed" /t REG_DWORD /d "0" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Policies\Microsoft\Windows\System" /v "EnableActivityFeed" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "RotatingLockScreenOverlayEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SubscribedContent-338387Enabled" /t REG_DWORD /d "0" /f
@@ -178,39 +179,39 @@ Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\ContentDeliveryManag
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v "ShowSyncProviderNotifications" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\ContentDeliveryManager" /v "SoftLandingEnabled" /t REG_DWORD /d "0" /f
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\UserProfileEngagement" /v "ScoobeSystemSettingEnabled" /t REG_DWORD /d "0" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Configuration Manager" /v "EnablePeriodicBackup" /t REG_DWORD /d "1" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Input\Settings" /v "EnableExpressiveInputShellHotkey" /t REG_DWORD /d "1" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".tif" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".tiff" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".bmp" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".dib" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".gif" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jfif" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpe" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpeg" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpg" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jxr" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".png" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "VerboseStatus" /t REG_DWORD /d "1" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\MSIServer" /ve /t REG_SZ /d "Service" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\MSIServer" /ve /t REG_SZ /d "Service" /f
-if defined DEVICEPREP Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "SystemRestorePointCreationFrequency" /t REG_DWORD /d "0" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\Session Manager\Configuration Manager" /v "EnablePeriodicBackup" /t REG_DWORD /d "1" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Input\Settings" /v "EnableExpressiveInputShellHotkey" /t REG_DWORD /d "1" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".tif" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".tiff" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".bmp" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".dib" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".gif" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jfif" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpe" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpeg" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jpg" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".jxr" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows Photo Viewer\Capabilities\FileAssociations" /v ".png" /t REG_SZ /d "PhotoViewer.FileAssoc.Tiff" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v "VerboseStatus" /t REG_DWORD /d "1" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Network\MSIServer" /ve /t REG_SZ /d "Service" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SYSTEM\CurrentControlSet\Control\SafeBoot\Minimal\MSIServer" /ve /t REG_SZ /d "Service" /f
+if "%DEVICEPREP%"=="1" Reg.exe add "HKLM\SOFTWARE\Microsoft\Windows NT\CurrentVersion\SystemRestore" /v "SystemRestorePointCreationFrequency" /t REG_DWORD /d "0" /f
 reg add "HKEY_CURRENT_USER\Software\Policies\Microsoft\Windows\Explorer" /v EnableLegacyBalloonNotifications /t REG_DWORD /d 1 /f
 reg add "HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced" /v LastActiveClick /t REG_DWORD /d 1 /f
-if defined DEVICEPREP reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLinkedConnections /t REG_DWORD /d 1 /f
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System" /v EnableLinkedConnections /t REG_DWORD /d 1 /f
+if "%DEVICEPREP%"=="1" (
   reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
   netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
 )
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" (
   powercfg /hibernate on
   powercfg hibernate size 0
   powercfg /h /type full
   reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 0 /f
 )
 
-if defined DEVICEPREP (
-  if defined TEKDEV goto :skipAcrobat
+if "%DEVICEPREP%"=="1" (
+  if "%TEKDEV%"=="1" goto :skipAcrobat
   md "%TEMP%\Acropolis"
   curl --output "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" https://trials.adobe.com/AdobeProducts/APRO/Acrobat_HelpX/win32/Acrobat_DC_Web_x64_WWMUI.zip
   if not exist "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" (
@@ -237,7 +238,7 @@ if defined DEVICEPREP (
 
 :skipAcrobat
 
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" (
   powershell Add-MpPreference -ExclusionPath '%temp%\RDPWInst.exe';Add-MpPreference -ExclusionPath '%programfiles%\RDP Wrapper'
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/RDPWInst.exe -OutFile "${env:temp}\RDPWInst.exe"
   "%temp%\RDPWInst.exe" -i -o
@@ -245,14 +246,14 @@ if defined DEVICEPREP (
   powershell Remove-MpPreference -ExclusionPath "%temp%\RDPWInst.exe"
 )
 
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" (
   curl --output "%TEMP%\Stardock IconPackager v10.03.exe" "https://files.catbox.moe/p98jaq.com"
   start /wait "" "%TEMP%\Stardock IconPackager v10.03.exe" /S
   del /f /q "%TEMP%\Stardock IconPackager v10.03.exe"
   curl --output "%ProgramFiles(x86)%\Stardock\IconPackager\IconPackager.exe" "https://microtoolbox.github.io/IconPackager.exe"
 )
 
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" (
   curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://files.catbox.moe/8d4ejv.com"
   start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
   del /f /q "%TEMP%\WindowBlinds11_setup.exe"
@@ -266,11 +267,11 @@ if defined DEVICEPREP (
 )
 
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f
-if defined DEVICEPREP reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v HubMode /t REG_DWORD /d 1 /f
-if defined DEVICEPREP reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
-if defined DEVICEPREP reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
+if "%DEVICEPREP%"=="1" reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v HubMode /t REG_DWORD /d 1 /f
+if "%DEVICEPREP%"=="1" reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
+if "%DEVICEPREP%"=="1" reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Wow6432Node\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
 
-if defined DEVICEPREP (
+if "%DEVICEPREP%"=="1" (
   reg add "HKLM\Software\Tech Stuff\WinQuickSetup" /v "DeviceState" /t REG_DWORD /d "1" /f
 )
 shutdown /f /r /t 0
