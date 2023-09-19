@@ -291,6 +291,7 @@ if "%DEVICEPREP%"=="1" (
 
 if "%DEVICEPREP%"=="1" (
   curl --output "%TEMP%\WMC.zip" "https://microtoolbox.github.io/WMC.zip"
+  mkdir "%TEMP%\WMC"
   tar -xf "%TEMP%\WMC.zip" -C "%TEMP%\WMC"
   del /f /q "%TEMP%\WMC.zip"
   call "%TEMP%\WMC\InstallBLUE.bat"
