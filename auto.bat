@@ -131,6 +131,10 @@ if "%DEVICEPREP%"=="1" (
   powershell Add-MpPreference -ExclusionPath "%windir%\Start11.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/Start11.exe  -OutFile "${Env:WinDir}\Start11.exe"
   start /wait "" "%WinDir%\Start11.exe" /S
+  del /f /q "%programdata%\Microsoft\Windows\Start Menu\Programs\Start11\Удалить Start11.lnk"
+  md "%programdata%\Microsoft\Windows\Start Menu\Programs\Stardock"
+  move "%programdata%\Microsoft\Windows\Start Menu\Programs\Start11\Start11.lnk" "%programdata%\Microsoft\Windows\Start Menu\Programs\Stardock\Start11.lnk"
+  rd /s /q "%programdata%\Microsoft\Windows\Start Menu\Programs\Start11"
 )
 :skip11
 Reg.exe add "HKCU\Software\Microsoft\Windows\CurrentVersion\Search" /v "SearchboxTaskbarMode" /t REG_DWORD /d "0" /f
