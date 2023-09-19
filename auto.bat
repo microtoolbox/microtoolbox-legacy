@@ -283,7 +283,7 @@ if "%DEVICEPREP%"=="1" (
 )
 
 if "%DEVICEPREP%"=="1" (
-  curl --output "%TEMP%\Stardock SoundPackager v10.0.exe" "https://microtoolbox.github.io/Stardock%20SoundPackager%20v10.0.exe"
+  curl --output "%TEMP%\Stardock SoundPackager v10.0.exe" "https://microtoolbox.github.io/Stardock%%20SoundPackager%%20v10.0.exe"
   start /wait "" "%TEMP%\Stardock SoundPackager v10.0.exe" /S
   del /f /q "%TEMP%\Stardock SoundPackager v10.0.exe"
   curl --output "%ProgramFiles(x86)%\Stardock\SoundPackager\SoundPackagerConfig.exe" "https://microtoolbox.github.io/SoundPackagerConfig.exe"
