@@ -1,6 +1,12 @@
 @echo off &chcp 850 >nul &pushd "%~dp0"
 reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v DeviceState 2>&1 | find "0x1"
 if errorlevel 1 set DEVICEPREP=1
+:parseArgs
+if "%~1"=="" goto :argsParsed
+set "%~1"
+shift /1
+goto :parseArgs
+:argsParsed
 if defined DEVICEPREP echo Performing device setup...
 if not defined DEVICEPREP echo Performing user setup...
 if defined DEVICEPREP (
