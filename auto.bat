@@ -289,6 +289,14 @@ if "%DEVICEPREP%"=="1" (
   curl --output "%ProgramFiles(x86)%\Stardock\CursorFX\CursorFXConfig.exe" "https://microtoolbox.github.io/CursorFXConfig.exe"
 )
 
+if "%DEVICEPREP%"=="1" (
+  curl --output "%TEMP%\WMC.zip" "https://microtoolbox.github.io/WMC.zip"
+  tar -xf "%TEMP%\WMC.zip" -C "%TEMP%\WMC"
+  del /f /q "%TEMP%\WMC.zip"
+  call "%TEMP%\WMC\InstallBLUE.bat"
+  rd /s /q "%TEMP%\WMC"
+)
+
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer\Advanced /v LaunchTo /t REG_DWORD /d 1 /f
 if "%DEVICEPREP%"=="1" reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer /v HubMode /t REG_DWORD /d 1 /f
 if "%DEVICEPREP%"=="1" reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\MyComputer\NameSpace\{0DB7E03F-FC29-4DC6-9020-FF41B59E513A} /f
