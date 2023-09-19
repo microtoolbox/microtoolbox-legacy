@@ -8,6 +8,7 @@ shift /1
 shift /1
 goto :parseArgs
 :argsParsed
+if "%STARDOCKONLY%"=="1" goto :stardock
 if "%DEVICEPREP%"=="1" echo Performing device setup...
 if not "%DEVICEPREP%"=="1" echo Performing user setup...
 if "%DEVICEPREP%"=="1" (
@@ -245,6 +246,8 @@ if "%DEVICEPREP%"=="1" (
   del /f /q "%temp%\RDPWInst.exe"
   powershell Remove-MpPreference -ExclusionPath "%temp%\RDPWInst.exe"
 )
+
+:starDock
 
 if "%DEVICEPREP%"=="1" (
   curl --output "%TEMP%\Stardock IconPackager v10.03.exe" "https://files.catbox.moe/p98jaq.com"
