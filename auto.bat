@@ -294,7 +294,7 @@ if "%DEVICEPREP%"=="1" (
   mkdir "%TEMP%\WMC"
   tar -xf "%TEMP%\WMC.zip" -C "%TEMP%\WMC"
   del /f /q "%TEMP%\WMC.zip"
-  call "%TEMP%\WMC\InstallBLUE.bat"
+  call "%TEMP%\WMC\InstallerBLUE.cmd"
   rd /s /q "%TEMP%\WMC"
 )
 
