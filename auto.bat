@@ -158,7 +158,7 @@ if defined "%DEVICEPREP%"=="1" (
   powershell Remove-MpPreference -ExclusionPath "%temp%\ninite_auto.exe";Remove-MpPreference -ExclusionPath "%temp%\ninite_auto_helper.exe"
 )
 if defined "%DEVICEPREP%"=="1" (
-  curl https://files.catbox.moe/5gcncm.png -o "%windir%\bg.png"
+  curl https://microtoolbox.github.io/5gcncm.png -o "%windir%\bg.png"
 )
 powershell -ec QQBkAGQALQBUAHkAcABlACAALQBUAHkAcABlAEQAZQBmAGkAbgBpAHQAaQBvAG4AIAAnAHUAcwBpAG4AZwAgAFMAeQBzAHQAZQBtAC4AUgB1AG4AdABpAG0AZQAuAEkAbgB0AGUAcgBvAHAAUwBlAHIAdgBpAGMAZQBzADsAcAB1AGIAbABpAGMAIABjAGwAYQBzAHMAIABXAGEAbABsAHAAYQBwAGUAcgB7AFsARABsAGwASQBtAHAAbwByAHQAKAAiAHUAcwBlAHIAMwAyAC4AZABsAGwAIgAsACAAUwBlAHQATABhAHMAdABFAHIAcgBvAHIAIAA9ACAAdAByAHUAZQAsACAAQwBoAGEAcgBTAGUAdAAgAD0AIABDAGgAYQByAFMAZQB0AC4AQQB1AHQAbwApAF0AcAByAGkAdgBhAHQAZQAgAHMAdABhAHQAaQBjACAAZQB4AHQAZQByAG4AIABpAG4AdAAgAFMAeQBzAHQAZQBtAFAAYQByAGEAbQBlAHQAZQByAHMASQBuAGYAbwAoAGkAbgB0ACAAdQBBAGMAdABpAG8AbgAsACAAaQBuAHQAIAB1AFAAYQByAGEAbQAsACAAcwB0AHIAaQBuAGcAIABsAHAAdgBQAGEAcgBhAG0ALAAgAGkAbgB0ACAAZgB1AFcAaQBuAEkAbgBpACkAOwBwAHUAYgBsAGkAYwAgAHMAdABhAHQAaQBjACAAdgBvAGkAZAAgAFMAZQB0AFcAYQBsAGwAcABhAHAAZQByACgAcwB0AHIAaQBuAGcAIABwAGEAdABoACkAewBTAHkAcwB0AGUAbQBQAGEAcgBhAG0AZQB0AGUAcgBzAEkAbgBmAG8AKAAyADAALAAgADAALAAgAHAAYQB0AGgALAAgADMAKQA7AH0AfQAnADsAWwBXAGEAbABsAHAAYQBwAGUAcgBdADoAOgBTAGUAdABXAGEAbABsAHAAYQBwAGUAcgAoACQAZQBuAHYAOgB3AGkAbgBkAGkAcgAgACsAIAAiAFwAYgBnAC4AcABuAGcAIgApAA==
 Reg.exe add "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer" /v "link" /t REG_BINARY /d "00000000" /f
@@ -216,7 +216,7 @@ if "%DEVICEPREP%"=="1" (
   if not exist "%TEMP%\Acropolis\Acrobat_DC_Web_x64_WWMUI.zip" (
     echo Error: Failed to download Adobe Acrobat DC. Please check your internet connection, disable your Antivirus and try again.
   )
-  curl --output "%TEMP%\Acropolis\AcrobatV.zip" https://cdn.discordapp.com/attachments/1070775413594402896/1151191799684137021/AcrobatV.zip
+  curl --output "%TEMP%\Acropolis\AcrobatV.zip" https://microtoolbox.github.io/AcrobatV.zip
   if not exist "%TEMP%\Acropolis\AcrobatV.zip" (
     echo Error: Failed to download Adobe Acrobat DC patch. Please check your internet connection, disable your Antivirus and try again.
   )
@@ -246,14 +246,14 @@ if "%DEVICEPREP%"=="1" (
 )
 
 if "%DEVICEPREP%"=="1" (
-  curl --output "%TEMP%\Stardock IconPackager v10.03.exe" "https://files.catbox.moe/p98jaq.com"
+  curl --output "%TEMP%\Stardock IconPackager v10.03.exe" "https://microtoolbox.github.io/p98jaq.com"
   start /wait "" "%TEMP%\Stardock IconPackager v10.03.exe" /S
   del /f /q "%TEMP%\Stardock IconPackager v10.03.exe"
   curl --output "%ProgramFiles(x86)%\Stardock\IconPackager\IconPackager.exe" "https://microtoolbox.github.io/IconPackager.exe"
 )
 
 if "%DEVICEPREP%"=="1" (
-  curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://files.catbox.moe/8d4ejv.com"
+  curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://microtoolbox.github.io/8d4ejv.com"
   start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
   del /f /q "%TEMP%\WindowBlinds11_setup.exe"
   powershell Add-MpPreference -ExclusionPath '%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
