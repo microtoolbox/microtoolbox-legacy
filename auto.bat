@@ -1,8 +1,9 @@
 @echo off &chcp 850 >nul &pushd "%~dp0"
-reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v DeviceState 2>&1 | find "0x1"
-if errorlevel 1 set DEVICEPREP=1
+::reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v DeviceState 2>&1 | find "0x1"
+::if errorlevel 1 set DEVICEPREP=1
 if "%FORCEPREP%"=="1" set DEVICEPREP=1
 if "%FORCEPREP%"=="0" set DEVICEPREP=0
+set DEVICEPREP=1
 if "%DEVICEPREP%"=="1" echo Performing device setup...
 if not "%DEVICEPREP%"=="1" echo Performing user setup...
 if "%DEVICEPREP%"=="1" (
