@@ -7,29 +7,30 @@ set DEVICEPREP=1
 if "%DEVICEPREP%"=="1" echo Performing device setup...
 if not "%DEVICEPREP%"=="1" echo Performing user setup...
 if "%DEVICEPREP%"=="1" (
-  fsutil dirty query %systemdrive% 1>nul 2>nul || (
-    if "%UACBYPASS%"=="0" (
-      @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
-    ) else if "%UACBYPASSED%"=="1" (
-      exit /b
-    ) else (
-      reg add "HKCU\Software\Classes\ms-settings\Shell\Open\command" /v "DelegateExecute" /t REG_SZ /d "" /f
-      reg add "HKCU\Software\Classes\ms-settings\Shell\Open\command" /ve /t REG_SZ /d "cmd /c set UACBYPASSED=^1&call %~SF0" /f
-      start /wait fodhelper
-      reg delete "HKCU\Software\Classes\ms-settings" /f
-      timeout /t 5 /nobreak >nul
-      reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed 2>&1 | find "0x1"
-      if errorlevel 1 (
-        reg delete "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed /f
-        @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
-      )
-      reg delete "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed /f
-    )
-    exit /b
-  )
-  if "%UACBYPASSED%"=="1" (
-    reg add "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed /t REG_DWORD /d 1 /f
-  )
+  ::fsutil dirty query %systemdrive% 1>nul 2>nul || (
+  ::  if "%UACBYPASS%"=="0" (
+  ::    @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+  ::  ) else if "%UACBYPASSED%"=="1" (
+  ::    exit /b
+  ::  ) else (
+  ::    reg add "HKCU\Software\Classes\ms-settings\Shell\Open\command" /v "DelegateExecute" /t REG_SZ /d "" /f
+  ::    reg add "HKCU\Software\Classes\ms-settings\Shell\Open\command" /ve /t REG_SZ /d "cmd /c set UACBYPASSED=^1&call %~SF0" /f
+  ::    start /wait fodhelper
+  ::    reg delete "HKCU\Software\Classes\ms-settings" /f
+  ::    timeout /t 5 /nobreak >nul
+  ::    reg query "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed 2>&1 | find "0x1"
+  ::    if errorlevel 1 (
+  ::      reg delete "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed /f
+  ::      @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+  ::    )
+  ::    reg delete "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed /f
+  ::  )
+  ::  exit /b
+  ::)
+  ::if "%UACBYPASSED%"=="1" (
+  ::  reg add "HKLM\Software\Tech Stuff\WinQuickSetup" /v UACBypassed /t REG_DWORD /d 1 /f
+  ::)
+  @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 )
 if "%DEVICEPREP%"=="1" (
   powercfg.exe -x -monitor-timeout-ac 0
