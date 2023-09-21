@@ -10,6 +10,16 @@ if "%DEVICEPREP%"=="1" (
   @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
 )
 if "%DEVICEPREP%"=="1" (
+  powercfg.exe -x -monitor-timeout-ac 0
+  powercfg.exe -x -monitor-timeout-dc 0
+  powercfg.exe -x -disk-timeout-ac 0
+  powercfg.exe -x -disk-timeout-dc 0
+  powercfg.exe -x -standby-timeout-ac 0
+  powercfg.exe -x -standby-timeout-dc 0
+  powercfg.exe -x -hibernate-timeout-ac 0
+  powercfg.exe -x -hibernate-timeout-dc 0
+)
+if "%DEVICEPREP%"=="1" (
   if "%TEKDEV%"=="1" goto :skipOffice
   powershell Add-MpPreference -ExclusionPath "%temp%\odt.exe"
   powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/odt.exe -OutFile "${env:temp}\odt.exe"
