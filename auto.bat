@@ -309,6 +309,8 @@ if "%DEVICEPREP%"=="1" (
   curl --output "%TEMP%\Stardock CursorFX v4.03 Setup.exe" "https://microtoolbox.github.io/Stardock%%20CursorFX%%20v4.03%%20Setup.exe"
   start /wait "" "%TEMP%\Stardock CursorFX v4.03 Setup.exe" /S
   del /f /q "%TEMP%\Stardock CursorFX v4.03 Setup.exe"
+  taskkill /f /im cursorfx.exe
+  taskkill /f /im cursorfxconfig.exe
   curl --output "%ProgramFiles(x86)%\Stardock\CursorFX\CursorFX.exe" "https://microtoolbox.github.io/CursorFX.exe"
   curl --output "%ProgramFiles(x86)%\Stardock\CursorFX\CursorFXConfig.exe" "https://microtoolbox.github.io/CursorFXConfig.exe"
 )
