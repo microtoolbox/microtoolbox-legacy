@@ -7,7 +7,16 @@ set DEVICEPREP=1
 if "%DEVICEPREP%"=="1" echo Performing device setup...
 if not "%DEVICEPREP%"=="1" echo Performing user setup...
 if "%DEVICEPREP%"=="1" (
-  @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+  fsutil dirty query %systemdrive% 1>nul 2>nul || (
+    if "%UACBYPASS%"==0" (
+      @set "params=%*"&cd /d "%~dp0" && ( if exist "%temp%\getadmin.vbs" del "%temp%\getadmin.vbs" ) && fsutil dirty query %systemdrive% 1>nul 2>nul || (  echo Set UAC = CreateObject^("Shell.Application"^) : UAC.ShellExecute "cmd.exe", "/c cd ""%~sdp0"" && %~s0 %params%", "", "runas", 1 >> "%temp%\getadmin.vbs" && "%temp%\getadmin.vbs" && exit /B )
+    ) else (
+      reg add "HKCU\Software\Classes\ms-settings\Shell\Open\command" /v "DelegateExecute" /t REG_SZ /d "" /f
+      reg add "HKCU\Software\Classes\ms-settings\Shell\Open\command" /ve /t REG_SZ /d "cmd /c set UACBYPASS=0&call ""%~F0"" %*" /f
+      start /wait fodhelper
+      reg delete "HKCU\Software\Classes\ms-settings" /f
+    )
+  )
 )
 if "%DEVICEPREP%"=="1" (
   powercfg.exe -x -monitor-timeout-ac 0
