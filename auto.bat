@@ -305,6 +305,19 @@ if "%DEVICEPREP%"=="1" (
 )
 
 if "%DEVICEPREP%"=="1" (
+  curl --output "%TEMP%\SkinStudio_10_setup_sd.exe" "https://microtoolbox.github.io/SkinStudio_10_setup_sd.exe"
+  start /wait "" "%TEMP%\SkinStudio_10_setup_sd.exe" /S
+  del /f /q "%TEMP%\SkinStudio_10_setup_sd.exe"
+  curl --output "%ProgramFiles(x86)%\Stardock\SkinStudio\SdDisplay.exe" "https://microtoolbox.github.io/SkinStudio_SdDisplay.exe"
+)
+
+if "%DEVICEPREP%"=="1" (
+  curl --output "%TEMP%\Aero11.wba" "https://microtoolbox.github.io/Aero11.wba"
+  start /wait "" "%ProgramFiles(x86)%\Stardock\WindowBlinds\wbload.exe" "%TEMP%\Aero11.wba"
+  del /f /q "%TEMP%\Aero11.wba"
+)
+
+if "%DEVICEPREP%"=="1" (
   curl --output "%TEMP%\WMC.zip" "https://microtoolbox.github.io/WMC.zip"
   mkdir "%TEMP%\WMC"
   tar -xf "%TEMP%\WMC.zip" -C "%TEMP%\WMC"
