@@ -48,16 +48,23 @@ To launch Micro Toolbox:<br>
 <li>Type in <code style="font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; padding: 0.2em 0.4em; border-radius: 5px; font-size: 85%; background: #afb8c133;" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/auto|iex</code></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
+<ol style="padding-inline-start: 1em;display:none;" id="10to7">
+<li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
+<li>Type in <code style="font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; padding: 0.2em 0.4em; border-radius: 5px; font-size: 85%; background: #afb8c133;" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell irm microtoolbox.github.io/10to7|iex</code></li>
+<li>Press <kbd>Enter</kbd></li>
+</ol>
 <ol style="padding-inline-start: 1em;display:none;" id="legacy">
 <li>Press <kbd>Win</kbd>+<kbd>R</kbd></li>
 <li>Type in <code style="font-family: ui-monospace,SFMono-Regular,SF Mono,Menlo,Consolas,Liberation Mono,monospace; padding: 0.2em 0.4em; border-radius: 5px; font-size: 85%; background: #afb8c133;" onclick="copyTextToClipboard(this.innerText);createNotification({positionClass: 'nfc-top-right', showDuration: 3500, theme: 'success'})({message: 'Copied!'});">powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm microtoolbox.github.io/go|iex</code></li>
 <li>Press <kbd>Enter</kbd></li>
 </ol>
-<input checked type="radio" name="mode" id="guiselect" onclick="document.getElementById('gui').style.display = '';document.getElementById('auto').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
+<input checked type="radio" name="mode" id="guiselect" onclick="document.getElementById('gui').style.display = '';document.getElementById('10to7').style.display = 'none';document.getElementById('auto').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
 <label for="guiselect">GUI Mode</label>
-<input type="radio" name="mode" id="autoselect" onclick="document.getElementById('auto').style.display = '';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
+<input type="radio" name="mode" id="autoselect" onclick="document.getElementById('auto').style.display = '';document.getElementById('10to7').style.display = 'none';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
 <label for="autoselect">Auto Mode</label>
-<input type="radio" name="mode" id="legacyselect" onclick="document.getElementById('auto').style.display = 'none';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = '';">
+<input type="radio" name="mode" id="autoselect" onclick="document.getElementById('10to7').style.display = '';document.getElementById('gui').style.display = 'none';document.getElementById('auto').style.display = 'none';document.getElementById('legacy').style.display = 'none';">
+<label for="autoselect">10to7 Mode</label>
+<input type="radio" name="mode" id="legacyselect" onclick="document.getElementById('auto').style.display = 'none';document.getElementById('10to7').style.display = 'none';document.getElementById('gui').style.display = 'none';document.getElementById('legacy').style.display = '';">
 <label for="legacyselect">Legacy Mode</label>
 <br>
 <div>If you need older Windows versions, get the <a href="https://archive.org/details/msaio_202207">Microsoft All-in-one</a></div>
