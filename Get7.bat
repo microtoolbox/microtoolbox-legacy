@@ -9,7 +9,9 @@ powershell Copy-Item -Path """$env:temp\Get7\Windows\*""" -Destination """$env:w
 start explorer
 powershell iex ^(^(iwr -UseBasicParsing https://github.com/AveYo/fox/raw/main/Edge_Removal.bat^).Content.replace^('-nop -noe', '-nop'^)^)
 start /wait "" "%temp%\Get7\Win7Edge.exe" /silentinstall "%temp%\Get7\Win7Edge.ini"
+pushd "%temp%\Get7\Win7Boot"
 call "%temp%\Get7\Win7Boot\install768.bat"
+popd
 start /wait "" "%temp%\Get7\Win7Games.exe" /S
 start /wait "" "%temp%\Get7\Win7Icons.exe"
 reg import "%temp%\Get7\Win7Start.reg"
