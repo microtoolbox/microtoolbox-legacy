@@ -1,13 +1,13 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
 curl https://dl.dropbox.com/scl/fi/bvzso2ww9a31i8ql7rvll/Get7.zip?rlkey=t4r5osi8yfkvafjrt1mcun1fl -Lo "%temp%\Get7.zip"
+powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
+powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
+powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
 powershell Expand-Archive -Force -Path '%temp%\Get7.zip' -DestinationPath '%temp%\Get7'
 del /f /q "%temp%\Get7.zip"
 cd /d "%temp%\Get7"
 taskkill /f /im explorer.exe
-powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
-powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
-powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
 powershell Add-MpPreference -ExclusionPath '%windir%\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%windir%\Win7Volume.exe'
 powershell Copy-Item -Path """$env:temp\Get7\Windows\*""" -Destination """$env:windir""" -Recurse -Force
