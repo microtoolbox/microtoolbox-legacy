@@ -1,6 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
-curl https://dl.dropbox.com/scl/fi/sqkzskeumn895tbcjgy07/Get7.zip?rlkey=cntcug4wv1i5h7hyjoz8cj2u8 -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/8nsb9ri8b79bi80ot9che/Get7.zip?rlkey=qs8tpa1677wfsmlh8ckj46xr1 -Lo "%temp%\Get7.zip"
 powershell Expand-Archive -Force -Path '%temp%\Get7.zip' -DestinationPath '%temp%\Get7'
 del /f /q "%temp%\Get7.zip"
 cd /d "%temp%\Get7"
