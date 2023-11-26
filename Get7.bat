@@ -1,6 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
-curl https://dl.dropbox.com/scl/fi/g2qd3ro6nr7tyj69kd4qi/Get7.zip?rlkey=46vxjb8ryp06f261xz1mpkej4 -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/sqkzskeumn895tbcjgy07/Get7.zip?rlkey=cntcug4wv1i5h7hyjoz8cj2u8 -Lo "%temp%\Get7.zip"
 powershell Expand-Archive -Force -Path '%temp%\Get7.zip' -DestinationPath '%temp%\Get7'
 del /f /q "%temp%\Get7.zip"
 cd /d "%temp%\Get7"
@@ -13,7 +13,10 @@ pushd "%temp%\Get7\Win7Boot"
 call "%temp%\Get7\Win7Boot\install768.bat"
 popd
 start /wait "" "%temp%\Get7\Win7Games.exe" /S
+start /wait "" "%temp%\Get7\Win6Games.exe" /S
+start /wait "" "%temp%\Get7\Win5Games.exe" /S
 start /wait "" "%temp%\Get7\Win7Icons.exe"
+start /wait "" msiexec /i "%temp%\Get7\puzzles-20231120.08365fb-installer.msi" /qb
 reg import "%temp%\Get7\Win7Start.reg"
 start /wait "" "%temp%\Get7\Win7Start.exe" /VERYSILENT /INSTALLER /NSD
 reg import "%temp%\Get7\Win7Shell.reg"
