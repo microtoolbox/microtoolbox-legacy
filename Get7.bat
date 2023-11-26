@@ -15,7 +15,7 @@ popd
 start /wait "" "%temp%\Get7\Win7Games.exe" /S
 start /wait "" "%temp%\Get7\Win7Icons.exe"
 reg import "%temp%\Get7\Win7Start.reg"
-start /wait "" "%temp%\Get7\Win7Start.exe" /VERYSILENT /INSTALLER
+start /wait "" "%temp%\Get7\Win7Start.exe" /VERYSILENT /INSTALLER /NSD
 reg import "%temp%\Get7\Win7Shell.reg"
 start /wait "" "%temp%\Get7\Win7Shell.exe" /S
 reg import "%temp%\Get7\Windows\OldNewExplorer\Win7Explorer.reg"
