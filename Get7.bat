@@ -1,6 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
-curl https://dl.dropbox.com/scl/fi/be6vz29xcmqcuhpmjm0e8/Get7.zip?rlkey=1l94sd3uwcsj7v11wratgeamz -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/g2qd3ro6nr7tyj69kd4qi/Get7.zip?rlkey=46vxjb8ryp06f261xz1mpkej4 -Lo "%temp%\Get7.zip"
 powershell Expand-Archive -Force -Path '%temp%\Get7.zip' -DestinationPath '%temp%\Get7'
 del /f /q "%temp%\Get7.zip"
 cd /d "%temp%\Get7"
@@ -124,7 +124,7 @@ reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Exp
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer /v EnableLegacyBalloonNotifications /t REG_DWORD /d 1 /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Battery Mode" /t REG_SZ /d BatteryMode64 /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "PENetwork" /t REG_SZ /d PENetwork /f
-reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer /v DisableNotificationCenter /t REG_DWORD /d 1 /f
+reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer /v DisableNotificationCenter /t REG_DWORD /d 1 /f
 reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v SecurityHealth /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\VMware, Inc.\VMware Tools" /v ShowTray /t REG_DWORD /d 1 /f
 start ms-settings:lockscreen
