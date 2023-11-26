@@ -5,6 +5,7 @@ powershell Expand-Archive -Force -Path '%temp%\Get7.zip' -DestinationPath '%temp
 del /f /q "%temp%\Get7.zip"
 cd /d "%temp%\Get7"
 taskkill /f /im explorer.exe
+powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Copy-Item -Path """$env:temp\Get7\Windows\*""" -Destination """$env:windir""" -Recurse -Force
 start explorer
 powershell iex ^(^(iwr -UseBasicParsing https://github.com/AveYo/fox/raw/main/Edge_Removal.bat^).Content.replace^('-nop -noe', '-nop'^)^)
@@ -16,7 +17,7 @@ start /wait "" "%temp%\Get7\Win7Games.exe" /S
 start /wait "" "%temp%\Get7\Win6Games.exe" /S
 start /wait "" "%temp%\Get7\Win5Games.exe" /S
 start /wait "" "%temp%\Get7\Win7Icons.exe"
-start /wait "" msiexec /i "%temp%\Get7\puzzles-20231120.08365fb-installer.msi" /qb
+start /wait "" msiexec /i "%temp%\Get7\winpuzzles.msi" /qb
 reg import "%temp%\Get7\Win7Start.reg"
 start /wait "" "%temp%\Get7\Win7Start.exe" /VERYSILENT /INSTALLER /NSD
 reg import "%temp%\Get7\Win7Shell.reg"
