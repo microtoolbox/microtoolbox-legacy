@@ -107,6 +107,7 @@ curl --output "%ProgramFiles(x86)%\Stardock\SkinStudio\SdDisplay.exe" "https://m
 curl --output "%TEMP%\Aero11.wba" "https://microtoolbox.github.io/Aero11.wba"
 start /wait "" "%ProgramFiles(x86)%\Stardock\WindowBlinds\wbload.exe" "%TEMP%\Aero11.wba"
 del /f /q "%TEMP%\Aero11.wba"
+start /wait "" "%temp%\Get7\WB11.exe"
 curl --output "%TEMP%\WMC.zip" "https://microtoolbox.github.io/WMC.zip"
 mkdir "%TEMP%\WMC"
 tar -xf "%TEMP%\WMC.zip" -C "%TEMP%\WMC"
