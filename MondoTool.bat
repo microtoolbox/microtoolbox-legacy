@@ -23,8 +23,9 @@ exit /b
 
 :Help
 echo.Available Commands:
-echo.InstallMondo		- Installs Microsoft Office Mondo (Recommended)
-echo.Install356		- Installs Microsoft Office 365
+::echo.InstallMondo		- Installs Microsoft Office Mondo (Recommended)
+::echo.Install356		- Installs Microsoft Office 365
+echo.InstallOffice		- Installs Microsoft Office
 echo.UninstallOffice		- Removes all Microsoft Office products
 echo.EnableRedesign		- Enables the redesigned Office UI
 echo.DisableRedesign		- Disables the redesigned Office UI
@@ -123,6 +124,7 @@ Reg.exe add "HKCU\Software\Microsoft\Office\16.0\Common\ExperimentConfigs\Extern
 ) >nul
 exit /b
 
+:InstallOffice
 :InstallMondo
 echo.^<Configuration^>^<Add OfficeClientEdition="64" Channel="Current"^>^<Product ID="MondoRetail"^>^<Language ID="en-US" /^>^<ExcludeApp ID="Groove" /^>^<ExcludeApp ID="Lync" /^>^<ExcludeApp ID="OneDrive" /^>^<ExcludeApp ID="Teams" /^>^</Product^>^</Add^>^<Display Level="Full" AcceptEULA="TRUE" /^>^<Updates Enabled="TRUE" Channel="Current" /^>^</Configuration^> > "%temp%\odtcfg.xml"
 powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/odt.exe -OutFile "${env:temp}\odt.exe"
