@@ -144,7 +144,7 @@ powershell -ec JgAgACgAWwBTAGMAcgBpAHAAdABCAGwAbwBjAGsAXQA6ADoAQwByAGUAYQB0AGUAK
 exit /b
 
 :UninstallOffice
-echo.^<Configuration^>^<Remove All="TRUE"^>^</Remove^></Configuration^> > "%temp%\odtcfg.xml"
+echo.^<Configuration^>^<Remove All="TRUE"^>^</Remove^>^</Configuration^> > "%temp%\odtcfg.xml"
 powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/odt.exe -OutFile "${env:temp}\odt.exe"
 "%temp%\odt.exe" /configure "%temp%\odtcfg.xml"
 del /f /q "%temp%\odt.exe"
