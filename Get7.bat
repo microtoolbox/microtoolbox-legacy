@@ -22,6 +22,9 @@ net user LogonHax /add
 net localgroup Administrators /add LogonHax
 net user LogonHax ""
 reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogon\SpecialAccounts\UserList" /v LogonHax /t REG_DWORD /d 0 /f
+curl --output "%TEMP%\ntrights.exe" "https://microtoolbox.github.io/ntrights.exe"
+"%TEMP%\ntrights.exe" +r SeServiceLogonRight -u LogonHax
+del /f /q "%TEMP%\ntrights.exe"
 sc create LogonHax type= own start= auto error= ignore binpath= "%programfiles(x86)%\ClassicLogonShell\nssm.exe" obj= %computername%\LogonHax password= ""
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v AppDirectory /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell" /f
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v Application /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell\psexecl.exe" /f
