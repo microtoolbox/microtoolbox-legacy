@@ -23,7 +23,7 @@ reg add "HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows NT\CurrentVersion\Winlogo
 sc create LogonHax type= own start= auto error= ignore binpath= "%programfiles(x86)%\ClassicLogonShell\nssm.exe" obj= %computername%\LogonHax password= ""
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v AppDirectory /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell" /f
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v Application /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell\psexecl.exe" /f
-reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v AppParameters /t REG_SZ /d "-sx """C:\Program Files (x86)\ClassicLogonShell\logonhax2.exe"""" /f
+reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\logonhax\Parameters /v AppParameters /t REG_SZ /d "-accepteula -sx """C:\Program Files (x86)\ClassicLogonShell\logonhax2.exe"""" /f
 powershell iex ^(^(iwr -UseBasicParsing https://github.com/AveYo/fox/raw/main/Edge_Removal.bat^).Content.replace^('-nop -noe', '-nop'^)^)
 start /wait "" "%temp%\Get7\Win7Edge.exe" /silentinstall "%temp%\Get7\Win7Edge.ini"
 pushd "%temp%\Get7\Win7Boot"
