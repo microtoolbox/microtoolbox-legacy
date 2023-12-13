@@ -13,6 +13,8 @@ powershell Add-MpPreference -ExclusionPath '%windir%\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%programfiles(x86)%\ClassicLogonShell'
 powershell Copy-Item -Path """$env:temp\Get7\Windows\*""" -Destination """$env:windir""" -Recurse -Force
 powershell Copy-Item -Path """$env:temp\Get7\ClassicLogonShell""" -Destination """${env:programfiles(x86)}\""" -Recurse -Force
+mkdir "%ProgramFiles(x86)%\ClassicLogonShell\flags"
+icacls "%ProgramFiles(x86)%\ClassicLogonShell\flags" /T /C /grant Everyone:(OI)(CI)F
 sc create "Classic Logon Shell Launcher Service" type= own start= auto error= ignore binpath= "%programfiles(x86)%\ClassicLogonShell\LauncherService.exe"
 start explorer
 reg add HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Lsa /v LimitBlankPasswordUse /t REG_DWORD /d 0 /f
