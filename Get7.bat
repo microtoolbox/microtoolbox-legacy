@@ -1,5 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
+set 1=6&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
 curl https://dl.dropbox.com/scl/fi/wq2bk3y4m1k5lv4im1pd6/Get7.zip?rlkey=8r6uetucfzb0ivwplfflppi1y -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
@@ -170,6 +171,8 @@ reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Personaliza
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageUrl /t REG_SZ /d "%windir%\logon.png" /f
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageStatus /t REG_DWORD /d 1 /f
 icacls "C:\ProgramData\Microsoft\Windows\SystemData" /reset /t /c /l
+set 1=7&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
+timeout /t 5 /nobreak
 shutdown /f /r /t 0
 exit /b
 
