@@ -1,5 +1,6 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
+goto :main
 powershell exit !!^(Get-MpComputerStatus^).AMRunningMode
 if not errorlevel 1 goto :main
 powershell exit ^(Get-MpComputerStatus^).AMRunningMode -ne 'Not running'
@@ -135,8 +136,8 @@ del /f /q "%temp%\RDPWInst.exe"
 curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://microtoolbox.github.io/8d4ejv.com"
 start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
 del /f /q "%TEMP%\WindowBlinds11_setup.exe"
-powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
-powershell Add-MpPreference -ExclusionPath '%temp%\Get7\autocrack.exe'
+powershell Add-MpPreference -ExclusionPath '%temp%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
+powershell Add-MpPreference -ExclusionPath '%temp%\autocrack.exe'
 curl --output "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
 curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
 start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
@@ -178,6 +179,7 @@ reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer /v Disabl
 reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v SecurityHealth /f
 reg add "HKEY_CURRENT_USER\SOFTWARE\VMware, Inc.\VMware Tools" /v ShowTray /t REG_DWORD /d 1 /f
 del /f /q "%systemdrive%\Users\Public\Desktop\Windows Media Center.lnk"
+del /f /q "%userprofile%\Desktop\Pinball.lnk"
 start ms-settings:lockscreen
 powershell sleep 10;(New-Object -ComObject wscript.shell).SendKeys('{TAB}{TAB}{TAB}{TAB}{ENTER}');sleep 1;(New-Object -ComObject wscript.shell).SendKeys('%windir%\logon.png{ENTER}')
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization /v NoLockScreen /t REG_DWORD /d 1 /f
@@ -190,7 +192,7 @@ reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Personaliza
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageUrl /t REG_SZ /d "%windir%\logon.png" /f
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageStatus /t REG_DWORD /d 1 /f
 icacls "C:\ProgramData\Microsoft\Windows\SystemData" /reset /t /c /l
-set 1=7&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
+::set 1=7&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
 timeout /t 5 /nobreak
 shutdown /f /r /t 0
 exit /b
