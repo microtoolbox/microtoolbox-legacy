@@ -190,6 +190,12 @@ reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Personaliza
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageUrl /t REG_SZ /d "%windir%\logon.png" /f
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageStatus /t REG_DWORD /d 1 /f
 icacls "C:\ProgramData\Microsoft\Windows\SystemData" /reset /t /c /l
+curl --output "%TEMP%\WMC.zip" "https://microtoolbox.github.io/WMC.zip"
+mkdir "%TEMP%\WMC"
+tar -xf "%TEMP%\WMC.zip" -C "%TEMP%\WMC"
+del /f /q "%TEMP%\WMC.zip"
+call "%TEMP%\WMC\InstallerBLUE.cmd"
+rd /s /q "%TEMP%\WMC"
 set 1=7&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
 timeout /t 5 /nobreak
 shutdown /f /r /t 0
