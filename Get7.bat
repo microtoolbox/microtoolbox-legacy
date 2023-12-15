@@ -2,6 +2,8 @@
 whoami /user | findstr /i /c:S-1-5-18 >nul || ( call :RunAsTI "%~f0" %* & exit /b )
 powershell exit !!^(Get-MpComputerStatus^).AMRunningMode
 if not errorlevel 1 goto :main
+powershell exit ^(Get-MpComputerStatus^).AMRunningMode -ne 'Not running'
+if not errorlevel 1 goto :main
 powershell exit ^(Get-MpComputerStatus^).IsTamperProtected
 if errorlevel 1 (
   reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v ConsentPromptBehaviorAdmin /t REG_DWORD /d 0 /f
