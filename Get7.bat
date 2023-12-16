@@ -21,7 +21,7 @@ if errorlevel 1 (
 )
 :main
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
-curl https://dl.dropbox.com/scl/fi/4jxnzdrnajogkbbavb3pk/Get7.zip?rlkey=0b6fmko4buv2rv7q2gxt3hl3c -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/w6r9oeto83yuctq425qvc/Get7.zip?rlkey=yusui4jfsh68bx9mg2utrc3jm -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
@@ -197,6 +197,8 @@ icacls "C:\ProgramData\Microsoft\Windows\SystemData" /reset /t /c /l
 ::set 1=7&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
 regsvr32 /s "%ProgramFiles%\ExplorerPatcher\ExplorerPatcher.amd64.dll"
 reg add "HKEY_CURRENT_USER\SOFTWARE\VMware, Inc.\VMware Tools" /v ShowTray /t REG_DWORD /d 0 /f
+del "%SystemDrive%\Scripts\OpenWebSearch.cmd"
+rd "%SystemDrive%\Scripts"
 
 powershell.exe -executionpolicy unrestricted "%TEMP%\Get7\AntiSearch.ps1"
 reg add "HKLM\Software\Classes\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /f /ve /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}"
