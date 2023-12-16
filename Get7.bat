@@ -21,7 +21,7 @@ if errorlevel 1 (
 )
 :main
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
-curl https://dl.dropbox.com/scl/fi/w6r9oeto83yuctq425qvc/Get7.zip?rlkey=yusui4jfsh68bx9mg2utrc3jm -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/58dgisbak9uh2eg3ed2w6/Get7.zip?rlkey=5si81oiae1752hbc8ooqloxes -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
@@ -176,6 +176,7 @@ reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Batt
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "PENetwork" /t REG_SZ /d PENetwork /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Volume" /t REG_SZ /d Win7Volume /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Taskbar Context Menu" /t REG_SZ /d "rundll32 TaskbarContextMenuTweaker.dll,Inject" /f
+mofcomp "%temp%\Get7\context.mof"
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "LogonHax User Mode Service" /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell\LogonHax2.exe" /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer /v DisableNotificationCenter /t REG_DWORD /d 1 /f
 reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v SecurityHealth /f
