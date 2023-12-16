@@ -195,7 +195,8 @@ reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Personaliza
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageStatus /t REG_DWORD /d 1 /f
 icacls "C:\ProgramData\Microsoft\Windows\SystemData" /reset /t /c /l
 ::set 1=7&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
-regsvr32 "%ProgramFiles%\ExplorerPatcher\ExplorerPatcher.amd64.dll"
+regsvr32 /s "%ProgramFiles%\ExplorerPatcher\ExplorerPatcher.amd64.dll"
+reg add "HKEY_CURRENT_USER\SOFTWARE\VMware, Inc.\VMware Tools" /v ShowTray /t REG_DWORD /d 0 /f
 
 powershell.exe -executionpolicy unrestricted "%TEMP%\Get7\AntiSearch.ps1"
 reg add "HKLM\Software\Classes\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /f /ve /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}"
