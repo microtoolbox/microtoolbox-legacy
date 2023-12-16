@@ -21,7 +21,7 @@ if errorlevel 1 (
 )
 :main
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
-curl https://dl.dropbox.com/scl/fi/l8lyyue5s79ziqy9u1mql/Get7.zip?rlkey=8q6177vuzrqdthygy91fxdhzd -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/4jxnzdrnajogkbbavb3pk/Get7.zip?rlkey=0b6fmko4buv2rv7q2gxt3hl3c -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
@@ -175,6 +175,7 @@ reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer /v 
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Battery Mode" /t REG_SZ /d BatteryMode64 /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "PENetwork" /t REG_SZ /d PENetwork /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Volume" /t REG_SZ /d Win7Volume /f
+reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Taskbar Context Menu" /t REG_SZ /d "rundll32 TaskbarContextMenuTweaker.dll,Inject" /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "LogonHax User Mode Service" /t REG_SZ /d "C:\Program Files (x86)\ClassicLogonShell\LogonHax2.exe" /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer /v DisableNotificationCenter /t REG_DWORD /d 1 /f
 reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v SecurityHealth /f
@@ -194,6 +195,24 @@ reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Personaliza
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\PersonalizationCSP /v LockScreenImageStatus /t REG_DWORD /d 1 /f
 icacls "C:\ProgramData\Microsoft\Windows\SystemData" /reset /t /c /l
 ::set 1=7&powershell irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
+regsvr32 "%ProgramFiles%\ExplorerPatcher\ExplorerPatcher.amd64.dll"
+
+powershell.exe -executionpolicy unrestricted "%TEMP%\Get7\AntiSearch.ps1"
+reg add "HKLM\Software\Classes\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /f /ve /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}"
+reg add "HKLM\Software\Classes\WOW6432Node\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /f /ve /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}"
+reg add "HKLM\Software\WOW6432Node\Classes\CLSID\{1d64637d-31e9-4b06-9124-e83fb178ac6e}\TreatAs" /f /ve /t REG_SZ /d "{64bc32b5-4eec-4de7-972d-bd8bd0324537}"
+reg add "HKLM\SOFTWARE\Classes\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}" /ve /t REG_SZ /d "ClassicSearch Address Bar Shrinker" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}\InProcServer32" /ve /t REG_SZ /d "%windir%\System32\ClassicSearch64.dll" /f
+reg add "HKLM\SOFTWARE\Classes\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}\InProcServer32" /v "ThreadingModel" /t REG_SZ /d "Apartment" /f
+reg add "HKLM\SOFTWARE\WOW6432Node\Classes\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}" /ve /t REG_SZ /d "ClassicSearch Address Bar Shrinker" /f
+reg add "HKLM\SOFTWARE\WOW6432Node\Classes\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}\InProcServer32" /ve /t REG_SZ /d "%windir%\System32\ClassicSearch32.dll" /f
+reg add "HKLM\SOFTWARE\WOW6432Node\Classes\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}\InProcServer32" /v "ThreadingModel" /t REG_SZ /d "Apartment" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}" /ve /t REG_SZ /d "ClassicSearch Address Bar Shrinker" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}\InProcServer32" /ve /t REG_SZ /d "%windir%\System32\ClassicSearch32.dll" /f
+reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{8baaa930-ba82-40d9-9632-16fd947e6068}\InProcServer32" /v "ThreadingModel" /t REG_SZ /d "Apartment" /f
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "NoInternetExplorer" /t REG_SZ /d "1" /f
+reg add "HKLM\SOFTWARE\Classes\Drive\shellex\FolderExtensions\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "DriveMask" /t REG_DWORD /d "255" /f
+
 timeout /t 5 /nobreak
 shutdown /f /r /t 0
 exit /b
