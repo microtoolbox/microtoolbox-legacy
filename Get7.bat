@@ -218,6 +218,9 @@ reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{8baaa930-ba82-40d9-9632-16fd94
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "NoInternetExplorer" /t REG_SZ /d "1" /f
 reg add "HKLM\SOFTWARE\Classes\Drive\shellex\FolderExtensions\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "DriveMask" /t REG_DWORD /d "255" /f
 
+echo [BatteryMode64.exe] > "%SystemDrive%\Users\Public\Documents\Stardock\WindowBlinds\wbperapp.ini"
+echo IgnoreApp=1 >> "%SystemDrive%\Users\Public\Documents\Stardock\WindowBlinds\wbperapp.ini"
+reg add HKEY_CURRENT_USER\SOFTWARE\Stardock\Start8\Start8.ini\Start8 /v RecentApps /t REG_SZ /d 0 /f
 timeout /t 5 /nobreak
 shutdown /f /r /t 0
 exit /b
