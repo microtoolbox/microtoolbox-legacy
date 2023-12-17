@@ -217,9 +217,11 @@ reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{8baaa930-ba82-40d9-9632-16fd94
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "NoInternetExplorer" /t REG_SZ /d "1" /f
 reg add "HKLM\SOFTWARE\Classes\Drive\shellex\FolderExtensions\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "DriveMask" /t REG_DWORD /d "255" /f
 
-start /D "%temp%\Get7\Supermium" /wait "" "%~DP0\mini_installer.exe" --system-level
-copy /y "%temp%\Get7\Supermium\progwrp.dll" "%ProgramFiles%\Supermium\Application"
+start /D "%temp%\Get7\Supermium" /wait "" "%temp%\Get7\Supermium\mini_installer.exe" --system-level
+copy /y "%temp%\Get7\Supermium\progwrp.dll" "%windir%\System32\progwrp.dll"
 "%temp%\Get7\Supermium\SetDefaultBrowser.exe" HKLM Supemium
+echo [BatteryMode64.exe] > "C:\Users\Public\Documents\Stardock\Windowblinds\wbperapp.ini"
+echo IgnoreApp=1 >> "C:\Users\Public\Documents\Stardock\Windowblinds\wbperapp.ini"
 mkdir "%localappdata%\Supermium\User Data"
 echo {"browser":{"enabled_labs_experiments":["disable-windows-10-custom-titlebar"]}} > "%localappdata%\Supermium\User Data\Local State"
 
