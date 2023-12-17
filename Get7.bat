@@ -221,6 +221,7 @@ reg add "HKLM\SOFTWARE\Classes\Drive\shellex\FolderExtensions\{8baaa930-ba82-40d
 echo [BatteryMode64.exe] > "%SystemDrive%\Users\Public\Documents\Stardock\WindowBlinds\wbperapp.ini"
 echo IgnoreApp=1 >> "%SystemDrive%\Users\Public\Documents\Stardock\WindowBlinds\wbperapp.ini"
 reg add HKEY_CURRENT_USER\SOFTWARE\Stardock\Start8\Start8.ini\Start8 /v RecentApps /t REG_SZ /d 0 /f
+reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer /v EnableLegacyBalloonNotifications /t REG_DWORD /d 1 /f
 timeout /t 5 /nobreak
 shutdown /f /r /t 0
 exit /b
