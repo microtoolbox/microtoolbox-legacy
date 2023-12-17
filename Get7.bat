@@ -172,7 +172,8 @@ reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Exp
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer /v HideSCANetwork /t REG_DWORD /d 1 /f
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer /v HideSCAPower /t REG_DWORD /d 1 /f
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer /v EnableLegacyBalloonNotifications /t REG_DWORD /d 1 /f
-reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Battery Mode" /t REG_SZ /d BatteryMode64 /f
+powershell exit ^(^(Get-WmiObject Win32_Battery^) -eq $null^)
+if not errorlevel 1 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Battery Mode" /t REG_SZ /d BatteryMode64 /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "PENetwork" /t REG_SZ /d PENetwork /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Volume" /t REG_SZ /d Win7Volume /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Taskbar Context Menu" /t REG_SZ /d "rundll32 TaskbarContextMenuTweaker.dll,Inject" /f
