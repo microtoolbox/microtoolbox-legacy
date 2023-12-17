@@ -21,7 +21,7 @@ if errorlevel 1 (
 )
 :main
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
-curl https://dl.dropbox.com/scl/fi/58dgisbak9uh2eg3ed2w6/Get7.zip?rlkey=5si81oiae1752hbc8ooqloxes -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/h97g590ep8svfh5ojptx6/Get7.zip?rlkey=1057g9iwk14o519ylf3esfjiz -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
@@ -172,8 +172,7 @@ reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Exp
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer /v HideSCANetwork /t REG_DWORD /d 1 /f
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Policies\Explorer /v HideSCAPower /t REG_DWORD /d 1 /f
 reg add HKEY_CURRENT_USER\Software\Microsoft\Windows\CurrentVersion\Explorer /v EnableLegacyBalloonNotifications /t REG_DWORD /d 1 /f
-powershell exit ^(^(Get-WmiObject Win32_Battery^) -eq $null^)
-if not errorlevel 1 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Battery Mode" /t REG_SZ /d BatteryMode64 /f
+reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Battery Mode" /t REG_SZ /d BatteryMode64 /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "PENetwork" /t REG_SZ /d PENetwork /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Volume" /t REG_SZ /d Win7Volume /f
 reg add HKEY_CURRENT_USER\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v "Classic Taskbar Context Menu" /t REG_SZ /d "rundll32 TaskbarContextMenuTweaker.dll,Inject" /f
@@ -218,10 +217,12 @@ reg add "HKLM\SOFTWARE\Classes\WOW6432Node\CLSID\{8baaa930-ba82-40d9-9632-16fd94
 reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Explorer\Browser Helper Objects\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "NoInternetExplorer" /t REG_SZ /d "1" /f
 reg add "HKLM\SOFTWARE\Classes\Drive\shellex\FolderExtensions\{8baaa930-ba82-40d9-9632-16fd947e6068}" /v "DriveMask" /t REG_DWORD /d "255" /f
 
-echo [BatteryMode64.exe] > "%SystemDrive%\Users\Public\Documents\Stardock\WindowBlinds\wbperapp.ini"
-echo IgnoreApp=1 >> "%SystemDrive%\Users\Public\Documents\Stardock\WindowBlinds\wbperapp.ini"
-reg add HKEY_CURRENT_USER\SOFTWARE\Stardock\Start8\Start8.ini\Start8 /v RecentApps /t REG_SZ /d 0 /f
-reg add HKEY_CURRENT_USER\SOFTWARE\Policies\Microsoft\Windows\Explorer /v EnableLegacyBalloonNotifications /t REG_DWORD /d 1 /f
+start /D "%temp%\Get7\Supermium" /wait "" "%~DP0\mini_installer.exe" --system-level
+copy /y "%temp%\Get7\Supermium\progwrp.dll" "%ProgramFiles%\Supermium\Application"
+"%temp%\Get7\Supermium\SetDefaultBrowser.exe" HKLM Supemium
+mkdir "%localappdata%\Supermium\User Data"
+echo {"browser":{"enabled_labs_experiments":["disable-windows-10-custom-titlebar"]}} > "%localappdata%\Supermium\User Data\Local State"
+
 timeout /t 5 /nobreak
 shutdown /f /r /t 0
 exit /b
