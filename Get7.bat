@@ -7,10 +7,13 @@ powershell exit ^(Get-MpComputerStatus^).AMRunningMode -ne 'Not running'
 if not errorlevel 1 goto :main
 powershell exit ^(Get-MpComputerStatus^).IsTamperProtected
 if errorlevel 1 (
-  reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v ConsentPromptBehaviorAdmin /t REG_DWORD /d 0 /f
-  start windowsdefender://threatsettings/
-  powershell sleep 5; ^(New-Object -ComObject wscript.shell^).sendkeys^('{Tab}{Tab}{Tab}{Tab} '^);sleep 5
-  reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v ConsentPromptBehaviorAdmin /t REG_DWORD /d 5 /f
+  wmic os get caption /value|findstr /C:"Microsoft Windows 11"
+  if errorlevel 1 (
+    reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v ConsentPromptBehaviorAdmin /t REG_DWORD /d 0 /f
+    start windowsdefender://threatsettings/
+    powershell sleep 5; ^(New-Object -ComObject wscript.shell^).sendkeys^('{Tab}{Tab}{Tab}{Tab} '^);sleep 5
+    reg add HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\System /v ConsentPromptBehaviorAdmin /t REG_DWORD /d 5 /f
+  )
 )
 set 1=6&powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';irm 'github.com/AveYo/LeanAndMean/raw/main/ToggleDefender.bat'^|iex
 :checkdefender
@@ -185,8 +188,11 @@ reg delete HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Run /v S
 reg add "HKEY_CURRENT_USER\SOFTWARE\VMware, Inc.\VMware Tools" /v ShowTray /t REG_DWORD /d 1 /f
 del /f /q "%systemdrive%\Users\Public\Desktop\Windows Media Center.lnk"
 del /f /q "%userprofile%\Desktop\Pinball.lnk"
-start ms-settings:lockscreen
-powershell sleep 10;(New-Object -ComObject wscript.shell).SendKeys('{TAB}{TAB}{TAB}{TAB}{ENTER}');sleep 1;(New-Object -ComObject wscript.shell).SendKeys('%windir%\logon.png{ENTER}')
+wmic os get caption /value|findstr /C:"Microsoft Windows 11"
+if errorlevel 1 (
+  start ms-settings:lockscreen
+  powershell sleep 10;(New-Object -ComObject wscript.shell).SendKeys('{TAB}{TAB}{TAB}{TAB}{ENTER}');sleep 1;(New-Object -ComObject wscript.shell).SendKeys('%windir%\logon.png{ENTER}')
+)
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization /v NoLockScreen /t REG_DWORD /d 1 /f
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization /v LockScreenOverlaysDisabled /t REG_DWORD /d 1 /f
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization /v NoChangingLockScreen /t REG_DWORD /d 1 /f
