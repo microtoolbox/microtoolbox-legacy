@@ -191,7 +191,7 @@ del /f /q "%userprofile%\Desktop\Pinball.lnk"
 wmic os get caption /value|findstr /C:"Microsoft Windows 11"
 if errorlevel 1 (
   start ms-settings:lockscreen
-  powershell sleep 10;(New-Object -ComObject wscript.shell).SendKeys('{TAB}{TAB}{TAB}{TAB}{ENTER}');sleep 1;(New-Object -ComObject wscript.shell).SendKeys('%windir%\logon.png{ENTER}')
+  powershell sleep 10;^(New-Object -ComObject wscript.shell^).SendKeys^('{TAB}{TAB}{TAB}{TAB}{ENTER}'^);sleep 3;^(New-Object -ComObject wscript.shell^).SendKeys^('%windir%\logon.png{ENTER}'^);sleep 3
 )
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization /v NoLockScreen /t REG_DWORD /d 1 /f
 reg add HKEY_LOCAL_MACHINE\SOFTWARE\Policies\Microsoft\Windows\Personalization /v LockScreenOverlaysDisabled /t REG_DWORD /d 1 /f
