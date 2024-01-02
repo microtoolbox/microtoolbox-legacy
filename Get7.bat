@@ -128,22 +128,22 @@ powercfg /hibernate on
 powercfg hibernate size 0
 powercfg /h /type full
 reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Session Manager\Power" /v HiberbootEnabled /t REG_DWORD /d 0 /f
-reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
-netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
-powershell Add-MpPreference -ExclusionPath '%ProgramFiles%\RDP Wrapper'
-powershell Add-MpPreference -ExclusionPath '%temp%\RDPWInst.exe';[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/RDPWInst.exe -OutFile "${env:temp}\RDPWInst.exe"
-"%temp%\RDPWInst.exe" -i -o
-del /f /q "%temp%\RDPWInst.exe"
+::reg add "HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Control\Terminal Server" /v fDenyTSConnections /t REG_DWORD /d 0 /f
+::netsh advfirewall firewall set rule group="remote desktop" new enable=Yes
+::powershell Add-MpPreference -ExclusionPath '%ProgramFiles%\RDP Wrapper'
+::powershell Add-MpPreference -ExclusionPath '%temp%\RDPWInst.exe';[System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/RDPWInst.exe -OutFile "${env:temp}\RDPWInst.exe"
+::"%temp%\RDPWInst.exe" -i -o
+::del /f /q "%temp%\RDPWInst.exe"
 curl --output "%TEMP%\WindowBlinds11_setup.exe" "https://microtoolbox.github.io/8d4ejv.com"
 start /wait "" "%TEMP%\WindowBlinds11_setup.exe" /S
 del /f /q "%TEMP%\WindowBlinds11_setup.exe"
-powershell Add-MpPreference -ExclusionPath '%temp%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
-powershell Add-MpPreference -ExclusionPath '%temp%\autocrack.exe'
-curl --output "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
-curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
-start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
-del /f /q "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
-del /f /q "%TEMP%\autocrack.exe"
+::powershell Add-MpPreference -ExclusionPath '%temp%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe'
+::powershell Add-MpPreference -ExclusionPath '%temp%\autocrack.exe'
+::curl --output "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe" "https://microtoolbox.github.io/Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
+::curl --output "%TEMP%\autocrack.exe" "https://microtoolbox.github.io/autocrack.exe"
+::start /wait "" "%TEMP%\autocrack.exe" "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
+::del /f /q "%TEMP%\Stardock_WindowBlinds_v11.02_Patch_Jasi2169.exe"
+::del /f /q "%TEMP%\autocrack.exe"
 curl --output "%TEMP%\SkinStudio_10_setup_sd.exe" "https://microtoolbox.github.io/SkinStudio_10_setup_sd.exe"
 start /wait "" "%TEMP%\SkinStudio_10_setup_sd.exe" /S
 del /f /q "%TEMP%\SkinStudio_10_setup_sd.exe"
