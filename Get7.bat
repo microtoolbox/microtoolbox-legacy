@@ -20,6 +20,7 @@ if errorlevel 1 (
   goto :checkdefender
 )
 :main
+reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
 curl https://dl.dropbox.com/scl/fi/h97g590ep8svfh5ojptx6/Get7.zip?rlkey=1057g9iwk14o519ylf3esfjiz -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
