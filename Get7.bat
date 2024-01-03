@@ -26,7 +26,7 @@ if errorlevel 1 (
 reg add "HKCU\Software\Classes\CLSID\{86ca1aa0-34aa-4e8b-a509-50c905bae2a2}\InprocServer32" /f /ve
 reg add "HKEY_CLASSES_ROOT\CLSID\{679f85cb-0220-4080-b29b-5540cc05aab6}\ShellFolder" /v Attributes /t REG_DWORD /d 2690646016 /f
 if not exist "%WinDir%\system32\curl.exe" powershell [System.Net.ServicePointManager]::SecurityProtocol = 'TLS12';iwr https://microtoolbox.github.io/curl.exe -OutFile "${env:windir}\system32\curl.exe"
-curl https://dl.dropbox.com/scl/fi/h97g590ep8svfh5ojptx6/Get7.zip?rlkey=1057g9iwk14o519ylf3esfjiz -Lo "%temp%\Get7.zip"
+curl https://dl.dropbox.com/scl/fi/3ajeyr213yjbkd4wfzd4g/Get7.zip?rlkey=0gg6yeqnh5rdbiwik7uhpxjij&dl=0 -Lo "%temp%\Get7.zip"
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\Win7Volume.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\Windows\PENetwork.exe'
 powershell Add-MpPreference -ExclusionPath '%temp%\Get7\WB11.exe'
